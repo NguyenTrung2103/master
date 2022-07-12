@@ -14,12 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('test');
+    return view('createuser');
 });
-
-Route::get('/a', function () {
-    return "view('test')";
+Route::get('/user', function () {
+    return view('userList');
 });
-
 
 
