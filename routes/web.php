@@ -18,5 +18,6 @@ use App\Http\Controllers\Admin\UserContrller;
 
 Route::prefix('admin')->group(function () {
     Route:: resource('user', UserContrller::class); 
+    
 });
 

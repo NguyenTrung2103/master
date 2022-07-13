@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UserList</title>
+    <link rel="stylesheet" href="/css/userlist.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
@@ -106,71 +107,7 @@
     
     
 <style>
-th{
-  text-align: center;
-}
-td{
-  text-align: center;
-}
-h2{
-  padding-left: 16px;
-    margin: -4px 0 4px 0;
-    width: 204px;
-}
-.menu{
-    height: 100%;
-    width: 100%;
-    background-color: #E7E9EB;
-    
-    overflow-x: hidden;
-    padding-top: 20px;
-    display: block;
-    font-family: Verdana,sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-}
-a{
-  font-family: "Segoe UI",Arial,sans-serif;
-    text-decoration: none;
-    display: block;
-    padding: 2px 1px 1px 16px;
-    color: inherit;
-    background-color: transparent;
-    box-sizing: inherit;
-    
-}
-a:hover{
-  color: #000000;
-  background-color: #cccccc;
-}
-   .system{
-    margin-top: 100px;
-   }
-  .table{
-    color:
-  }
-  .btn{
-    position: relative;
-  }
-  .btn-new{
-        background: #0D6EFD;
-        color: #FFFFFF;
-        float:right;
-        left: 0;
-        bottom: 50px;
-        width: 110px;
-        border-radius: 5px
-    }
-    .btn-new:hover{
-        background: #0D6EFD;
-        border: none;
-        color: #FFFFFF;
-    }
-    .pagination{
-        align-items: center;
-        display: flex;
-        justify-content: center;
-    }
+
 </style>
 </body>
 </html>

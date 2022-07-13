@@ -13,7 +13,7 @@ class ValidationRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,20 +24,15 @@ class ValidationRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
-    }
-    public static function ValidatesRequests($request)
-    {
-        return $request -> validate([
             'name'  => 'bali|required|alpha|min:2|regex:/^\S*$/u|'
             'email' => 'bali|required|email|Rule::notIn(['root'])'
             'psw'   => 'bali|required|min:8|'
             'psw-repeat' => 'bali|required|same:psw'
             'facebook' => 'url'
             'youtube'  => 'url'
-        ])
+        ];
     }
+   
     public function createUserRule(){
         return [
             'name' => function($value,$fail){

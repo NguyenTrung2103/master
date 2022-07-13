@@ -14,7 +14,8 @@ class UserContrller extends Controller
      */
     public function index()
     {
-        return view('admin.userList');
+        return view('admin.users.index');
+        
     }
 
     /**
@@ -24,7 +25,7 @@ class UserContrller extends Controller
      */
     public function create()
     {
-        return view('admin.createuser');
+        return view('layouts.admin.master');
     }
 
     /**
