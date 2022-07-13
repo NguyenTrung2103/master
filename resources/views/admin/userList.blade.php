@@ -1,39 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <link rel="stylesheet" href="   https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
-    <title>Document</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UserList</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 
-
-<div class="container">
-  <div class = "row">
-  <div class="col-3">
-     <ul>System
-         <li>User management</li>
-         <li>Role management</li>
-         <li>Permissin management</li>
-     </ul>
-     <ul>Catalog
-     <li>Prodct management</li>
-     <li>Category management</li>
-     
-     </ul>
- <div>
-<div class="col-md-9">
-    <div class="row" style="margin-top:8px">
+<div class="container-fluid ">
+  <div class="row " >
+  <div class="col-2 ">
+        <div class="menu">
+        <h2>
+          <span>
+            System
+          </span>
+        </h2>
+          <a target="_top" href="">User management</a>
+          <a href="">Role management</a>
+          <a href="">Permssion management</a>
+        <br>
+        <h2>
+          <span>
+            Catalog
+          </span>
+        </h2>
+          <a target="_top" href="">Product management</a>
+          <a href="">Category management</a>
+        
+        </div>
+      
+     </div>
+      <div class=" col-10">
+      <div class="row" style="margin-top:8px">
         <div class="col-md-10">
             <h1>UserList</h1>
             <a href="login" class="btn btn-new">+Addnew</a>
         </div>
-    </div>
-    <div class="col-md-10 ">
+     </div>
+      <div class="col-md-10 ">
         <table class="table">
             <thead>
               <tr>
@@ -92,17 +98,54 @@
           </li>
         </ul>
       </nav>
- </div>
+      </div>
   </div>
-  
-  </div>
-  </div>
+ 
 
-
-</body>
+</div>
+    
+    
 <style>
-    .container{
-  }
+th{
+  text-align: center;
+}
+td{
+  text-align: center;
+}
+h2{
+  padding-left: 16px;
+    margin: -4px 0 4px 0;
+    width: 204px;
+}
+.menu{
+    height: 100%;
+    width: 100%;
+    background-color: #E7E9EB;
+    
+    overflow-x: hidden;
+    padding-top: 20px;
+    display: block;
+    font-family: Verdana,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+a{
+  font-family: "Segoe UI",Arial,sans-serif;
+    text-decoration: none;
+    display: block;
+    padding: 2px 1px 1px 16px;
+    color: inherit;
+    background-color: transparent;
+    box-sizing: inherit;
+    
+}
+a:hover{
+  color: #000000;
+  background-color: #cccccc;
+}
+   .system{
+    margin-top: 100px;
+   }
   .table{
     color:
   }
@@ -129,4 +172,5 @@
         justify-content: center;
     }
 </style>
+</body>
 </html>

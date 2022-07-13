@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserContrller;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('createuser');
-});
-Route::get('/user', function () {
-    return view('userList');
-});
 
+
+Route::prefix('admin')->group(function () {
+    Route:: resource('user', UserContrller::class); 
+});
 

@@ -12,7 +12,7 @@
         event.preventDefalt();
 
         var mess = document.getElementById('errorText');
-        ver username = document.getElementById('tendn').value;
+        var username = document.getElementById('tendn').value;
         var pattern = new RegExp(/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
 
         if (username == ''){
@@ -64,19 +64,29 @@
 
 <body>
 
-   <div class="container">
+   <div class="container-fluid">
      <div class = "row">
-     <div class="col-3">
-        <ul>System
-            <li>User management</li>
-            <li>Role management</li>
-            <li>Permissin management</li>
-        </ul>
-        <ul>Catalog
-        <li>Prodct management</li>
-        <li>Category management</li>
+     <div class="col-3 ">
+        <div class="menu">
+        <h2>
+          <span>
+            System
+          </span>
+        </h2>
+          <a target="_top" href="">User management</a>
+          <a href="">Role management</a>
+          <a href="">Permssion management</a>
+        <br>
+        <h2>
+          <span>
+            Catalog
+          </span>
+        </h2>
+          <a target="_top" href="">Product management</a>
+          <a href="">Category management</a>
         
-        </ul>
+        </div>
+      
      </div>
      <div class="col-9 ">
      <div >
@@ -120,14 +130,31 @@ body{
 h1, label{
   color: DodgerBlue;
 }
+h2{
+  padding-left: 16px;
+    margin: -4px 0 4px 0;
+    width: 204px;
+}
+.menu{
+    height: 100%;
+    width: 100%;
+    background-color: #E7E9EB;
+    
+    overflow-x: hidden;
+    padding-top: 20px;
+    display: block;
+    font-family: Verdana,sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
 /* Full-width input fields */
   input[type=text], input[type=password] {
-  width: 100%;
+  width: 75%;
   padding: 15px;
   margin: 5px 0 22px 0;
   display: inline-block;
   border: none;
-  width:100%;
+  width: 100%;
   resize: vertical;
   padding:15px;
   border-radius:15px;
@@ -159,6 +186,20 @@ button {
 
 button:hover {
   opacity:1;
+}
+a{
+  font-family: "Segoe UI",Arial,sans-serif;
+    text-decoration: none;
+    display: block;
+    padding: 2px 1px 1px 16px;
+    color: inherit;
+    background-color: transparent;
+    box-sizing: inherit;
+    
+}
+a:hover{
+  color: #000000;
+  background-color: #cccccc;
 }
 
 /* Extra styles for the cancel button */
