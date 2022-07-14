@@ -1,17 +1,15 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>UserList</title>
+    @include('layouts.admin.partitions.head')
     <link rel="stylesheet" href="/css/userlist.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
+@include('layouts.admin.partitions.nav')
 <div class="container-fluid ">
-  <div class="row " >
-  <div class="col-2 ">
+
+<div class = "row">
+     <div class="col-2 ">
         <div class="menu">
         <h2>
           <span>
@@ -33,6 +31,7 @@
         </div>
       
      </div>
+     
       <div class=" col-10">
       <div class="row" style="margin-top:8px">
         <div class="col-md-10">
@@ -104,6 +103,7 @@
  
 
 </div>
+@include('layouts.admin.partitions.footer')
     
     
 <style>
