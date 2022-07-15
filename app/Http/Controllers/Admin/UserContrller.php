@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserRequests;
 use Illuminate\Http\Request;
 
 class UserContrller extends Controller
@@ -25,7 +26,7 @@ class UserContrller extends Controller
      */
     public function create()
     {
-        return view('layouts.admin.master');
+        return view('admin.users.create');
     }
 
     /**
@@ -34,9 +35,9 @@ class UserContrller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequests $request)
     {
-        //
+       dd($request);
     }
 
     /**

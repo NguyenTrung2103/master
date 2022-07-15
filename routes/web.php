@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Session;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,13 +21,18 @@ use App\Http\Controllers\Admin\PermissionController;
 
 
 Route::prefix('admin')->group(function () {
-    Route:: resource('user', UserContrller::class); 
+    Route::resource('user', UserContrller::class); 
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
 });
 
-Route::get('/test',function () {
-    return view ('admin/category/create');
+Route::prefix('session')->group(function () {
+    Route::get('get', 'SessionControllers@getSession'); 
+    Route::get('set', 'SessionControllers@setSession');
+    Route::get('unset', 'SessionControllers@unsetSession');
 });
+Route::view('session','session');
+Route::post('user', [Session::class,'login']);
+Route::view('sessionlist','sessionlist');    

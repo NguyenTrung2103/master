@@ -6,17 +6,17 @@
             System
           </span>
         </h2>
-          <a target="_top" href="/user">User management</a>
-          <a href="/role">Role management</a>
-          <a href="/permission">Permssion management</a>
+          <a target="_top" href="{{route('user.index')}}">User management</a>
+          <a href="{{route('role.index')}}">Role management</a>
+          <a href="/admin/permission">Permssion management</a>
         <br>
         <h2>
           <span>
             Catalog
           </span>
         </h2>
-          <a target="_top" href="/product">Product management</a>
-          <a href="/category">Category management</a>
+          <a target="_top" href="{{route('product.index')}}">Product management</a>
+          <a href="{{route('category.index')}}">Category management</a>
         
         </div>
       
