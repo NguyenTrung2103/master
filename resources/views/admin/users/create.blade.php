@@ -12,7 +12,7 @@
    <div class="container-fluid">
      @include('layouts.admin.partitions.sidebar')
      <div class="col-10 ">
-<form action="{{ route('user.store') }}" class="g-3 needs-validation" method="post">
+<form action="" class="g-3 needs-validation" method="POST">
 @csrf
      <div >
 
@@ -21,9 +21,6 @@
 <div>
 <label for="name"><b>Name</b></label>
 <input id="tendn" type="text"  name="name" required>
-@error('name')
-<span class="text-danger text-left">{{$message}}</span>
-@enderror
 </div>
 <label for="email"><b>Email</b></label>
 <input type="text" placeholder="Nhập Email" name="email" required>
@@ -43,8 +40,8 @@
 <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Nhớ Đăng Nhập
 </label>
 <div class="clearfix container">
-<button type="submit" class="signupbtn ">Save</button>
-<button type="submit" class="signupbtn ">Reset</button>
+<button type="submit" class="signupbtn col-md-6">Save</button>
+<button type="submit" class="signupbtn col-md-6">Reset</button>
 </div>
 </div>
 

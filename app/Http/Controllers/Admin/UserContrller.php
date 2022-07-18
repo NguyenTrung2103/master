@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequests;
 use Illuminate\Http\Request;
+use mail;
 
 class UserContrller extends Controller
 {
@@ -84,5 +85,7 @@ class UserContrller extends Controller
     {
         //
     }
-   
+    public function addFeedback(Request $request){
+        
+    }
 }

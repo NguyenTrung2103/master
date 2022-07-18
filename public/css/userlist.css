@@ -61,3 +61,12 @@ th{
           display: flex;
           justify-content: center;
       }
+      .btn-mail{
+        background: #FFFFFF;
+        color: #0D6EFD;
+        float:right;
+        left: 0;
+        bottom: 50px;
+        width: 110px;
+        border-radius: 5px
+    }

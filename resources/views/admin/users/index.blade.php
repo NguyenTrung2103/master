@@ -37,6 +37,7 @@
         <div class="col-md-10">
             <h1>UserList</h1>
             <a href="login" class="btn btn-new">+Addnew</a>
+            <a href="login" class="btn btn-mail">sent mail</a>
         </div>
      </div>
       <div class="col-md-10 ">
@@ -107,7 +108,15 @@
     
     
 <style>
-
+.btn-mail{
+        background: #FFFFFF;
+        color: #0D6EFD;
+        float:right;
+        left: 0;
+        bottom: 50px;
+        width: 110px;
+        border-radius: 5px
+    }
 </style>
 </body>
 </html>

@@ -19,8 +19,7 @@ use App\Http\Controllers\Session;
 */
 
 
-
-Route::prefix('admin')->group(function () {
+Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('user', UserContrller::class); 
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
@@ -36,3 +35,6 @@ Route::prefix('session')->group(function () {
 Route::view('session','session');
 Route::post('user', [Session::class,'login']);
 Route::view('sessionlist','sessionlist');    
+
+Route::view('contact','sendmail');
+Route::post('contact',[Session::class,'postcontact']);
