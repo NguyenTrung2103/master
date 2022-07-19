@@ -1,14 +1,18 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UserRequests;
-use Illuminate\Http\Request;
-use mail;
+use App\Http\Requests\Admin\UserRequest;
+use App\Http\Requests\SendMailUserProfileRequest;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Mail\Mailable;
+use App\Services\MailService;
+use App\Mail\InformUserProfile;
+use App\Rules\Validate;
+use Mail;
 
 class UserContrller extends Controller
 {
+    public $listuser;
     /**
      * Display a listing of the resource.
      *
@@ -16,10 +20,9 @@ class UserContrller extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
-        
+        $this->listuser = session()->get('users');
+        return view('admin.users.index', ['users' => $this->listuser]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -29,63 +32,50 @@ class UserContrller extends Controller
     {
         return view('admin.users.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequests $request)
+    public function store(UserRequest $request)
     {
-       dd($request);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-    public function addFeedback(Request $request){
         
+        session()->push('users', $request->only(['name','email','address']));
+        return  redirect('/admin/user');
     }
+
+    public function sendMail()
+    {
+        $this->listuser = session()->get('users');
+        return view('sendmail', ['users' => $this->listuser]);
+    }
+
+    protected $mailService;
+
+    public function __construct(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
+    public function sendMailUser(SendMailUserProfileRequest $request)
+    {
+        $targetMail = $request->validated()['email'];
+        $users = $this->getUsers();
+        if (!strcmp($targetMail, "all")) {
+            $users->each(function ($user) {
+                $this->mailService->sendUserProfile($user);
+            });
+            return redirect()->back();
+        }
+        $user = $users->firstWhere('email', $targetMail);
+        $this->mailService->sendUserProfile($user);
+        return redirect()->back();
+    }  
+
+    private function getUsers()
+    {
+        return collect(Session::get('users'));
+    }
+    
 }

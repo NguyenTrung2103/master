@@ -25,7 +25,9 @@ class Validate implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        $users = collect(Session::get('users'));
+
+        return empty($users->firstWhere('email', $value));
     }
 
     /**

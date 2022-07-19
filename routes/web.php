@@ -19,7 +19,10 @@ use App\Http\Controllers\Session;
 */
 
 
-Route::name('admin.')->prefix('admin')->group(function () {
+Route::name('admin.')->prefix('admin')->group(function () 
+{
+    Route::get('/mail', [UserContrller::class, 'sendMail'])->name('admin.sendmail');
+    Route::post('/user/send', [UserContrller::class, 'sendMailUser'])->name('user.send');
     Route::resource('user', UserContrller::class); 
     Route::resource('role', RoleController::class);
     Route::resource('permission', PermissionController::class);
@@ -27,14 +30,6 @@ Route::name('admin.')->prefix('admin')->group(function () {
     Route::resource('category', CategoryController::class);
 });
 
-Route::prefix('session')->group(function () {
-    Route::get('get', 'SessionControllers@getSession'); 
-    Route::get('set', 'SessionControllers@setSession');
-    Route::get('unset', 'SessionControllers@unsetSession');
-});
-Route::view('session','session');
-Route::post('user', [Session::class,'login']);
-Route::view('sessionlist','sessionlist');    
 
-Route::view('contact','sendmail');
-Route::post('contact',[Session::class,'postcontact']);
+//Route::view('contact','sendmail');
+//Route::post('contact',[Session::class,'postcontact']);

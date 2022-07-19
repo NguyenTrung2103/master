@@ -7,18 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisteredUser extends Mailable
+class InformUserProfile extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    protected $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct($user)
     {
         $this->user = $user;
     }
@@ -31,6 +31,8 @@ class RegisteredUser extends Mailable
     public function build()
     {
         
-        return $this->view('sendmail');
+        return $this->view('admin.users.inform-user-profile-mail',[
+            'user' => $this->user,
+        ]);
     }
 }

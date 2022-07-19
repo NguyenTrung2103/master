@@ -14,7 +14,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
-    'driver'  => env('MAIL_DRIVER', 'smtp'),
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -47,21 +47,18 @@ return [
         ],
 
         'ses' => [
-            //'transport' => 'ses',
-            'key' => env('SES_KEY'),
-            'secret' => env('SES_SECRET'),
-            'region' => 'us-east-1',
+            'transport' => 'ses',
+           
         ],
 
         'mailgun' => [
-            //'transport' => 'mailgun',
-            'domain' => env('MAILGUN_DOMAIN'),
-            'secret' => env('MAILGUN_SECRET'),
+            'transport' => 'mailgun',
+            
         ],
 
         'postmark' => [
-            //'transport' => 'postmark',
-            'secret' => env('SPARKPOST_SECRET'),
+            'transport' => 'postmark',
+            
         ],
 
         'sendmail' => [

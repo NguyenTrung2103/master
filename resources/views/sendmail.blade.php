@@ -1,13 +1,29 @@
-<form action="" method="post"> 
-  <div class="mb-3">
-  <label class="form-label">Email</label>
-  <input type="email" class="form-control bg-light" name="email" placeholder="Nhập email của bạn">
+@extends('layouts.admin.master')
+@section('content')
+<div class="container-fluid">
+  <div class="d-flex justify-content-between">
+    <p style="font-weight: bold;"> Send email to user </p>
+    <div>
+      <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Back</a>
+    </div>
   </div>
-  <div class="mb-3">
-  <label class="form-label">Content</label>
-  <textarea class="form-control bg-light" name="content" rows="5"></textarea>
-  </div>  
-  <div class="mb-3">
-     <button name="btn" type="submit" class="btn btn-primary">GỬI LIÊN HỆ</button>
-  </div>
- </form>
+  <form method="POST" action="{{ route('admin.user.send') }}">
+    @csrf
+    <select class="form-control" name="email">
+      <option value="all">Select a user</option>
+      @if(!empty($users))
+        @foreach($users as $user)
+        <option value="{{ $user['email'] }}">{{ $user['name'] }}</option>
+        @endforeach
+      @endif
+    </select>
+
+    <div class="d-flex justify-content-center">
+      <div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </div>
+    </div>
+  </form>
+    
+      
+@endsection    
