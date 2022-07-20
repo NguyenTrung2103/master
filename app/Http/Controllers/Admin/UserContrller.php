@@ -9,10 +9,11 @@ use App\Services\MailService;
 use App\Mail\InformUserProfile;
 use App\Rules\Validate;
 use Mail;
+use File;
 
 class UserContrller extends Controller
 {
-    public $listuser;
+    
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +21,8 @@ class UserContrller extends Controller
      */
     public function index()
     {
-        $this->listuser = session()->get('users');
-        return view('admin.users.index', ['users' => $this->listuser]);
+       
+        return view('admin.users.index', ['users' => $this->getUsers()]);
     }
     /**
      * Show the form for creating a new resource.
@@ -40,18 +41,17 @@ class UserContrller extends Controller
      */
     public function store(UserRequest $request)
     {
-        
-        session()->push('users', $request->only(['name','email','address']));
+        session()->push('users', $request->only(['name', 'email', 'address']));
         return  redirect('/admin/user');
     }
 
     public function sendMail()
     {
-        $this->listuser = session()->get('users');
-        return view('sendmail', ['users' => $this->listuser]);
+        return view('sendmail', ['users' => $this->getUsers()]);
     }
 
     protected $mailService;
+    protected $file;
 
     public function __construct(MailService $mailService)
     {
@@ -62,15 +62,21 @@ class UserContrller extends Controller
     {
         $targetMail = $request->validated()['email'];
         $users = $this->getUsers();
+        $path = public_path('uploads');
+        $attachment = null;
+        if($request->file('attachment'))
+        {
+            $attachment = $request->file('attachment');
+        }
         if (!strcmp($targetMail, "all")) {
             $users->each(function ($user) {
-                $this->mailService->sendUserProfile($user);
+                $this->mailService->sendUserProfile($user->firstWhere('email'), $this->file);
             });
             return redirect()->back();
         }
         $user = $users->firstWhere('email', $targetMail);
-        $this->mailService->sendUserProfile($user);
-        return redirect()->back();
+        $this->mailService->sendUserProfile($user, $attachment);
+        return redirect()->back()->with('success', 'Mail sent successfully.');
     }  
 
     private function getUsers()

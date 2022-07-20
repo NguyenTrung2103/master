@@ -25,6 +25,7 @@ class SendMailUserProfileRequest extends FormRequest
     {
         return [
             'email'=>'required',
+            'attachment'=>'required',
         ];
     }
 }

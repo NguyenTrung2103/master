@@ -13,8 +13,7 @@ class Session extends Controller
         $data = $req->input();
         $req->session()->put('user', $data);
         $data =  Session::all();
-        return redirect('sessionlist');
-        
+        return redirect('sessionlist');        
     }
 
 
