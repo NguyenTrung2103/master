@@ -3,6 +3,7 @@
 <head>
    @include('layouts.admin.partitions.head')
    <link href="/css/app.css" rel="stylesheet">
+   <link href="/css/userlist.css" rel="stylesheet">
    <link rel="stylesheet" href="/css/userlist.css">
 </head>
 

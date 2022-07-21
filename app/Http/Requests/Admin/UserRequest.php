@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Rules\ValidateUserName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -31,7 +30,7 @@ class UserRequest extends FormRequest
                 'required',
                 'min:2',
                 'not_regex:/^[@#$%&*]/',
-                
+
             ],
             'email' => 'required',
             'address' => 'required',

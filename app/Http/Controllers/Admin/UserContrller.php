@@ -1,19 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Http\Requests\SendMailUserProfileRequest;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Mail\Mailable;
 use App\Services\MailService;
-use App\Mail\InformUserProfile;
-use App\Rules\Validate;
-use Mail;
-use File;
 
 class UserContrller extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +17,6 @@ class UserContrller extends Controller
      */
     public function index()
     {
-       
         return view('admin.users.index', ['users' => $this->getUsers()]);
     }
     /**
@@ -64,8 +59,7 @@ class UserContrller extends Controller
         $users = $this->getUsers();
         $path = public_path('uploads');
         $attachment = null;
-        if($request->file('attachment'))
-        {
+        if ($request->file('attachment')) {
             $attachment = $request->file('attachment');
         }
         if (!strcmp($targetMail, "all")) {
@@ -77,11 +71,10 @@ class UserContrller extends Controller
         $user = $users->firstWhere('email', $targetMail);
         $this->mailService->sendUserProfile($user, $attachment);
         return redirect()->back()->with('success', 'Mail sent successfully.');
-    }  
+    }
 
     private function getUsers()
     {
         return collect(Session::get('users'));
     }
-    
 }

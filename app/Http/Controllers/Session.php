@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Mail\Mailable;
-
 
 class Session extends Controller
 {
-    function login (Request $req )
+    public function login(Request $req)
     {
         $data = $req->input();
         $req->session()->put('user', $data);
         $data =  Session::all();
-        return redirect('sessionlist');        
+        return redirect('sessionlist');
     }
 
 
@@ -25,10 +23,10 @@ class Session extends Controller
 
     public function postcontact(Request $req)
     {
-        Mail::send('/sendmail',[
+        Mail::send('/sendmail', [
             'email' => $req->email,
             'content' => $req->content,
-        ], function($mail) use($req){
+        ], function ($mail) use ($req) {
             $mail->to('trungnq2103@gmail.com');
             $mail->from('trungnq2103@gmail.com');
             $mail->subject();

@@ -62,7 +62,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="bt">
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary ">Save</button>
         <button type="submit" class="btn btn-secondary">Reset</button>
         </div>
     </form>
