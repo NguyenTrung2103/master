@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -12,6 +11,7 @@ class InformUserProfile extends Mailable
     use Queueable, SerializesModels;
 
     protected $user;
+
     protected $attachment;
 
     /**
@@ -32,18 +32,17 @@ class InformUserProfile extends Mailable
      */
     public function build()
     {
-        
-        $mail = $this->view('admin.users.inform-user-profile-mail', 
+        $mail = $this->view('admin.users.inform-user-profile-mail',
         [
             'user' => $this->user,
         ]);
-      
-      if ($this->attachment) {
-          $mail->attach($this->attachment, [
-                  'as' => ''.$this->attachment->getClientOriginalName(),
-           ]);
-      }
-      
-      return $mail;
+
+        if ($this->attachment) {
+            $mail->attach($this->attachment, [
+                'as' => ''.$this->attachment->getClientOriginalName(),
+            ]);
+        }
+
+        return $mail;
     }
 }

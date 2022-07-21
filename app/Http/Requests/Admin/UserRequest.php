@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Rules\ValidateUserName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -12,7 +11,6 @@ class UserRequest extends FormRequest
      *
      * @return bool
      */
-
     public function authorize()
     {
         return true;
@@ -23,7 +21,6 @@ class UserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-
     public function rules()
     {
         return [
@@ -31,13 +28,13 @@ class UserRequest extends FormRequest
                 'required',
                 'min:2',
                 'not_regex:/^[@#$%&*]/',
-                
+
             ],
             'email' => 'required',
             'address' => 'required',
             'password' => 'required',
             'fb' => 'url',
-            'ytb' => 'url'
+            'ytb' => 'url',
         ];
     }
 }

@@ -24,8 +24,8 @@ class SendMailUserProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required',
-            'attachment'=>'required',
+            'email' => 'required',
+            'attachment' => 'required',
         ];
     }
 }
