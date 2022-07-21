@@ -14,6 +14,7 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -47,14 +48,17 @@ return [
 
         'ses' => [
             'transport' => 'ses',
+           
         ],
 
         'mailgun' => [
             'transport' => 'mailgun',
+            
         ],
 
         'postmark' => [
             'transport' => 'postmark',
+            
         ],
 
         'sendmail' => [
