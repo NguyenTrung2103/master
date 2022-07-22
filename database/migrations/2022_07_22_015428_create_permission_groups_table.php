@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('test', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
+        Schema::create('permission_groups', function (Blueprint $table) {
+            $table->integer('id')->primary();
+            $table->string('name',255)->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test');
+        Schema::dropIfExists('permission_groups');
     }
 };

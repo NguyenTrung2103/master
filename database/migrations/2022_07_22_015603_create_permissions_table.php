@@ -13,8 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('test', function (Blueprint $table) {
-            $table->renameColumn('pass', 'passwork');
+        Schema::create('permissions', function (Blueprint $table) {
+            $table->integer('id')->primary();
+            $table->string('name',255)->unique();
+            $table->string('key',255)->unique();
+            $table->integer('permission_group_id');
+            
+            $table->timestamps();
         });
     }
 
@@ -25,8 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('test', function (Blueprint $table) {
-            $table->dropColumn('passwork');
-        });
+        Schema::dropIfExists('permissions');
     }
 };
