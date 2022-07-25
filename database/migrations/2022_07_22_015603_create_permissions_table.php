@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name',255)->unique();
             $table->string('key',255)->unique();
             $table->integer('permission_group_id');
-            
             $table->timestamps();
+            $table->foreign('permission_group_id')->references('id')->on('permission_groups')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

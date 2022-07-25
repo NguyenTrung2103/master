@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->bigInteger('id')->unsigned()->autoIncrement();
             $table->string('room',255);
-            $table->bigInteger('sender_id')->unsigned();
+            $table->bigInteger('sender_id');
             $table->string('sender_type');
             $table->text('content');
             $table->string('content_type')->default('text');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('association_type');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('sender_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
