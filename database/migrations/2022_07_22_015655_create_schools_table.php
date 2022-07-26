@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email')->unique()->nullable();
             $table->string('code')->unique()->nullable();
             $table->string('address')->unique()->nullable();
-            $table->string('type',10)->nullable();
-            $table->string('phone',100)->nullable();
+            $table->string('type', 10)->nullable();
+            $table->string('phone', 100)->nullable();
             $table->string('hotline');
             $table->string('province_code');
             $table->string('institution_code');

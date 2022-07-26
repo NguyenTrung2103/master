@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Taggable extends Model
 {
     use HasFactory;
+
     public function tag()
     {
         return $this->belongsTo(Tag::class);

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\PermissionGroup;
+use Illuminate\Database\Seeder;
 
 class PremissionGroupSeed extends Seeder
 {
@@ -15,7 +14,7 @@ class PremissionGroupSeed extends Seeder
      */
     public function run()
     {
-       // factory(App\Models\Supplide)
-       PermissionGroup::factory(10)->create();
+        // factory(App\Models\Supplide)
+        PermissionGroup::factory(10)->create();
     }
 }

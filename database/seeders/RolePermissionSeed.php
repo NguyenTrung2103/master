@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Eloquent\Factories\Sequence;
-use Illuminate\Database\Seeder;
-use App\Models\RolesPermission;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\RolePermission;
+use Illuminate\Database\Eloquent\Factories\Sequence;
+use Illuminate\Database\Seeder;
 
-class RolesPermissionSeed extends Seeder
+class RolePermissionSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +17,7 @@ class RolesPermissionSeed extends Seeder
      */
     public function run()
     {
-        RolesPermission::factory()
+        RolePermission::factory()
             ->count(10)
             ->state(new Sequence(
                 fn () => [

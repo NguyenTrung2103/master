@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50);
-            $table->string('email',32)->unique();
-            $table->string('username',50);
-            $table->string('password',200);
-            $table->string('phone',100);
+            $table->string('name', 50);
+            $table->string('email', 32)->unique();
+            $table->string('username', 50);
+            $table->string('password', 200);
+            $table->string('phone', 100);
             $table->string('address');
             $table->unsignedBigInteger('school_id')->nullable();
             $table->tinyInteger('type');
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('social_name');
             $table->string('social_nickname');
             $table->string('social_avatar');
-            $table->string ('description text');
+            $table->string('description text');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');

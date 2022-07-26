@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('attchments', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->string('uuid');
-            $table->string('attachable_type',255);
+            $table->string('attachable_type', 255);
             $table->bigInteger('attachable_id');
             $table->string('file_path');
             $table->string('file_name');

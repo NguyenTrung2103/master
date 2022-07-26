@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\PermissionGroup;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,9 +17,9 @@ class DatabaseSeeder extends Seeder
             PremissionGroupSeed::class,
             PermissionSeeder::class,
             RoleSeed::class,
-            RolesPermissionSeed::class,
+            RolePermissionSeed::class,
             SchoolSeed::class,
-            UserSeed::class, 
+            UserSeed::class,
             UsersRoleSeed::class,
             TagSeed::class,
             TaggableSeed::class,
