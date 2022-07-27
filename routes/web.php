@@ -31,3 +31,11 @@ Route::name('admin.')->prefix('admin')->group(function () {
 
 //Route::view('contact','sendmail');
 //Route::post('contact',[Session::class,'postcontact']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

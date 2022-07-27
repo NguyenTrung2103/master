@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'social_name' => fake()->name(),
             'social_nickname' => fake()->word(),
             'social_avatar' => fake()->word(),
-            'description text' => fake()->sentence(),
+            'description' => fake()->sentence(),
         ];
     }
 

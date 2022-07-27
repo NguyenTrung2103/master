@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('social_name');
             $table->string('social_nickname');
             $table->string('social_avatar');
-            $table->string('description text');
+            $table->string('description');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');
