@@ -19,12 +19,12 @@ return new class extends Migration
             $table->string('email', 32)->unique();
             $table->string('username', 50);
             $table->string('password', 200);
-            $table->string('phone', 100);
+            $table->string('phone', 100)->nullable();
             $table->string('address');
             $table->unsignedBigInteger('school_id')->nullable();
             $table->tinyInteger('type');
             $table->integer('parent_id');
-            $table->string('verified_at');
+            $table->string('verified_at')->nullable();
             $table->string('closed bool')->default(0);
             $table->string('code')->unique()->nullable();
             $table->tinyInteger('social_type');
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('social_name');
             $table->string('social_nickname');
             $table->string('social_avatar');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('school_id')->references('id')->on('schools')->onUpdate('cascade')->onDelete('cascade');

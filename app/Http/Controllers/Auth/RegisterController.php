@@ -52,7 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:2', 'confirmed'],
         ]);
     }
 
@@ -70,11 +70,11 @@ class RegisterController extends Controller
             'username' => $data['name'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'] ?? '',
-            'phone' => '090909012345',
+            'phone' => $data['phone'] ?? '',
             'school_id' => $data['school_id'] ?? null,
             'type' => $data['type'] ?? 0,
-            'parent_id' => $data['parent_id'] ?? 0,
-            'verified_at' => 'null',
+            'parent_id' => $data['parent_id'] ?? 0 ,
+            'verified_at' =>  null ,
             'closed bool' => false,
             'code' => $data['code'] ?? null,
             'social_type' => $data['social_type'] ?? 0,
@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'social_name' => $data['social_name'] ?? '',
             'social_nickname' => $data['social_nickname'] ?? '',
             'social_avatar' => $data['social_avatar'] ?? 'https://fakeimg.pl/300/',
-            'description' => 'abc',
+            'description' => $data['description'] ?? '',
 
         ]);
     }
