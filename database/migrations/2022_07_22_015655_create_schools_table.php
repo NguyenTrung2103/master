@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('schools', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->string('email')->unique()->nullable();
             $table->string('code')->unique()->nullable();
             $table->string('address')->unique()->nullable();
-            $table->string('type',10)->nullable();
-            $table->string('phone',100)->nullable();
+            $table->string('type', 10)->nullable();
+            $table->string('phone', 100)->nullable();
             $table->string('hotline');
             $table->string('province_code');
             $table->string('institution_code');
