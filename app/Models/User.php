@@ -4,10 +4,37 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Notifications\Notifiable;
 
-class User extends Model
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory;
+    use AuthenticableTrait;
+    use Notifiable;
+
+    protected $fillable = [
+        'name',
+        'email',
+        'username',
+        'password',
+        'address',
+        'phone',
+        'school_id',
+        'type',
+        'parent_id',
+        'verified_at',
+        'closed',
+        'code',
+        'social_type',
+        'social_id',
+        'social_name',
+        'social_nickname',
+        'social_avatar',
+        'description',
+    ];
 
     public function school()
     {
@@ -27,5 +54,17 @@ class User extends Model
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return ! is_null($this->verified_at);
+    }
+
+    public function markEmailAsVerified()
+    {
+        return $this->forceFill([
+            'verified_at' => $this->freshTimestamp(),
+        ])->save();
     }
 }
