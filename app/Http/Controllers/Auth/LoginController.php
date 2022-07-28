@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\Auth\LoginRequests;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -21,20 +23,50 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
+    protected function redirectTo()
+    {
+        if (Auth::user()->isAdmin()) {
+            return '/admin';
+        }
+
+        return '/home';
+    
+    }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    
+
+    public function login(LoginRequests $request)
     {
-        $this->middleware('guest')->except('logout');
+        $credentials = $request->getCredential();
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect($this->redirectPath());
+        }
+        return back()->with(
+            'message', 
+            "tên đăng nhập hoặc mật khẩu sai"
+        );
+
     }
+
+
+    
 }

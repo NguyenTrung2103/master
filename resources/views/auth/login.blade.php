@@ -8,6 +8,9 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if (Session::has('message'))
+                        {{ session('message') }}
+                    @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

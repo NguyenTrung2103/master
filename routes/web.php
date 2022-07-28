@@ -6,8 +6,11 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserContrller;
 use App\Http\Controllers\HomeController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Session;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::name('admin.')->prefix('admin')->group(function () {
+Route::name('admin.') ->prefix('admin')->middleware('AdminMiddleware') ->group(function () {
     Route::get('/mail', [UserContrller::class, 'sendMail'])->name('admin.sendmail');
     Route::post('/user/send', [UserContrller::class, 'sendMailUser'])->name('user.send');
     Route::resource('user', UserContrller::class);
@@ -37,6 +40,12 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes(['verify' => true]);
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');

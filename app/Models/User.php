@@ -66,4 +66,21 @@ class User extends Authenticatable implements MustVerifyEmail
             'verified_at' => $this->freshTimestamp(),
         ])->save();
     }
+
+    const TYPES = [
+        'admin' => 1,
+        'student' => 2,
+    ];
+
+    
+
+    public function isAdmin()
+    {
+        return $this->type == self::TYPES['admin'];
+    }
+
+    public function isStudent()
+    {
+        return $this->type == self::TYPES['student'];
+    }
 }
