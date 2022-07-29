@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class LoginRequests extends FormRequest
 {
@@ -16,8 +15,6 @@ class LoginRequests extends FormRequest
     {
         return true;
     }
-
-    
 
     /**
      * Get the validation rules that apply to the request.
@@ -36,15 +33,13 @@ class LoginRequests extends FormRequest
     {
         $credential = $this->validated();
 
-        if (!filter_var($credential['email'], FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($credential['email'], FILTER_VALIDATE_EMAIL)) {
             return [
-                'phone' => $credential['email'],
-                'password' => $credential['password']
+                'username' => $credential['email'],
+                'password' => $credential['password'],
             ];
         }
 
         return $credential;
     }
-
-
 }

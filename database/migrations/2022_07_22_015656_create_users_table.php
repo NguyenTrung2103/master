@@ -20,14 +20,14 @@ return new class extends Migration
             $table->string('username', 50);
             $table->string('password', 200);
             $table->string('phone', 100)->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->unsignedBigInteger('school_id')->nullable();
             $table->tinyInteger('type');
-            $table->integer('parent_id');
-            $table->string('verified_at')->nullable();
+            $table->integer('parent_id')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->string('closed bool')->default(0);
             $table->string('code')->unique()->nullable();
-            $table->tinyInteger('social_type');
+            $table->tinyInteger('social_type')->nullable();
             $table->tinyInteger('social_id')->unique()->nullable();
             $table->string('social_name');
             $table->string('social_nickname');

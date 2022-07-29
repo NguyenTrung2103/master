@@ -72,8 +72,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'student' => 2,
     ];
 
-    
-
     public function isAdmin()
     {
         return $this->type == self::TYPES['admin'];

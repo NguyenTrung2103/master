@@ -14,11 +14,6 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array<class-string, array<int, class-string>>
      */
-    protected $listen = [
-        'Illuminate\Auth\Events\Verified' => [
-            'App\Listeners\LogVerifiedUser',
-        ],
-    ];
 
     /**
      * Register any events for your application.
@@ -39,4 +34,15 @@ class EventServiceProvider extends ServiceProvider
     {
         return false;
     }
+
+    /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+        ],
+    ];
 }

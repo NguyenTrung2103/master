@@ -9,6 +9,9 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
+                    @if (Session::has('message'))
+                        {{ session('message') }}
+                    @endif
                         @csrf
 
                         <div class="row mb-3">
@@ -39,14 +42,14 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="phone" class="col-md-4 col-form-label text-md-end">{{ __('Phone number') }}</label>
+                            <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('User Name') }}</label>
 
                             <div class="col-md-6">
-                                 <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}">
+                                 <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('phone') }}">
 
-                                    @if ($errors->has('phone'))
+                                    @if ($errors->has('username'))
                                          <span class="invalid-feedback" role="alert">
-                                             <strong>{{ $errors->first('phone') }}</strong>
+                                             <strong>{{ $errors->first('username') }}</strong>
                                           </span>
                                      @endif
                              </div>

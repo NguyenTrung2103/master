@@ -5,12 +5,10 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserContrller;
-use App\Http\Controllers\HomeController;
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\Session;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +21,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::name('admin.') ->prefix('admin')->middleware('adminverify') ->group(function () {
+Route::name('admin.')->prefix('admin')->middleware('adminverify')->group(function () {
     Route::get('/mail', [UserContrller::class, 'sendMail'])->name('admin.sendmail');
     Route::post('/user/send', [UserContrller::class, 'sendMailUser'])->name('user.send');
     Route::resource('user', UserContrller::class);
@@ -46,6 +44,12 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
- 
+
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

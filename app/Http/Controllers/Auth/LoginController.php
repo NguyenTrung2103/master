@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequests;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -22,7 +21,6 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
 
     /**
      * Where to redirect users after login.
@@ -41,7 +39,6 @@ class LoginController extends Controller
         }
 
         return '/home';
-    
     }
 
     /**
@@ -49,8 +46,6 @@ class LoginController extends Controller
      *
      * @return void
      */
-    
-
     public function login(LoginRequests $request)
     {
         $credentials = $request->getCredential();
@@ -60,13 +55,10 @@ class LoginController extends Controller
 
             return redirect($this->redirectPath());
         }
+
         return back()->with(
-            'message', 
-            "tên đăng nhập hoặc mật khẩu sai"
+            'message',
+            'tên đăng nhập hoặc mật khẩu sai'
         );
-
     }
-
-
-    
 }
