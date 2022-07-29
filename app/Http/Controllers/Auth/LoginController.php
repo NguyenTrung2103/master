@@ -58,7 +58,7 @@ class LoginController extends Controller
 
         return back()->with(
             'message',
-            'tên đăng nhập hoặc mật khẩu sai'
+            'username or password is incorrect'
         );
     }
 }
