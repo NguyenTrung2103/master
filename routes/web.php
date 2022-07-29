@@ -23,7 +23,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::name('admin.') ->prefix('admin')->middleware('AdminMiddleware') ->group(function () {
+Route::name('admin.') ->prefix('admin')->middleware('adminverify') ->group(function () {
     Route::get('/mail', [UserContrller::class, 'sendMail'])->name('admin.sendmail');
     Route::post('/user/send', [UserContrller::class, 'sendMailUser'])->name('user.send');
     Route::resource('user', UserContrller::class);
