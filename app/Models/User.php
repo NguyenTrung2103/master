@@ -14,6 +14,11 @@ class User extends Authenticatable implements MustVerifyEmail
     use AuthenticableTrait;
     use Notifiable;
 
+    const TYPES = [
+        'admin' => 1,
+        'student' => 2,
+    ];
+
     protected $fillable = [
         'name',
         'email',
@@ -53,5 +58,27 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return ! is_null($this->verified_at);
+    }
+
+    public function markEmailAsVerified()
+    {
+        return $this->forceFill([
+            'verified_at' => $this->freshTimestamp(),
+        ])->save();
+    }
+
+    public function isAdmin()
+    {
+        return $this->type == self::TYPES['admin'];
+    }
+
+    public function isStudent()
+    {
+        return $this->type == self::TYPES['student'];
     }
 }

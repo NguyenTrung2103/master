@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'password' => bcrypt('123456@'),
             'phone' => '12354679',
             'address' => fake()->address(),
-            'type' => fake()->randomDigit(),
+            'type' => '2',
             'parent_id' => fake()->randomNumber(4, false),
             'verified_at' => now(),
             'closed bool' => false,
@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'social_name' => fake()->name(),
             'social_nickname' => fake()->word(),
             'social_avatar' => fake()->word(),
-            'description text' => fake()->sentence(),
+            'description' => fake()->sentence(),
         ];
     }
 
