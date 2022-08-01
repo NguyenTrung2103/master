@@ -14,6 +14,11 @@ class User extends Authenticatable implements MustVerifyEmail
     use AuthenticableTrait;
     use Notifiable;
 
+    const TYPES = [
+        'admin' => 1,
+        'student' => 2,
+    ];
+
     protected $fillable = [
         'name',
         'email',
@@ -66,11 +71,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'verified_at' => $this->freshTimestamp(),
         ])->save();
     }
-
-    const TYPES = [
-        'admin' => 1,
-        'student' => 2,
-    ];
 
     public function isAdmin()
     {

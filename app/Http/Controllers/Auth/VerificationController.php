@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Auth\Events\Verified;
 
 class VerificationController extends Controller
 {
@@ -57,6 +57,7 @@ class VerificationController extends Controller
 
         return redirect($this->redirectPath())->with('verified', true);
     }
+
     public function resend(Request $request)
     {
         $this->validate($request, [
@@ -65,6 +66,6 @@ class VerificationController extends Controller
         $user = User::where('email', $request->input('email'))->first();
         $user->sendEmailVerificationNotification();
 
-        return Response::json(["status" => 'Verification e-mail send.', "email" => $request->input('email')], 201);
+        return Response::json(['status' => 'Verification e-mail send.', 'email' => $request->input('email')], 201);
     }
 }
