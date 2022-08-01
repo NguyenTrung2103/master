@@ -35,7 +35,7 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (Auth::user()->isAdmin()) {
-            return '/admin';
+            return '/admin/user';
         }
 
         return '/home';
