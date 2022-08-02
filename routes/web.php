@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserContrller;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Session;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\PermissionGroupController;
 
 /*
 |--------------------------------------------------------------------------

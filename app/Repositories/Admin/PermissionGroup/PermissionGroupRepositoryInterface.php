@@ -6,6 +6,4 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface PermissionGroupRepositoryInterface extends BaseRepositoryInterface
 {
-   
-    
 }

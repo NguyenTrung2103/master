@@ -50,14 +50,14 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredential();
 
-        if (!Auth::attempt($credentials)) {
+        if (! Auth::attempt($credentials)) {
             return back()->with(
                 'message',
                 'username or password is incorrect'
             );
         }
 
-        if (!Auth::user()->hasVerifiedEmail()) {
+        if (! Auth::user()->hasVerifiedEmail()) {
             return back()->with(
                 'message',
                 'you need to verify your email first!'
