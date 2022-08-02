@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserContrller;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Session;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PermissionGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify'])-
     Route::resource('permission', PermissionController::class);
     Route::resource('product', ProductController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('permission-group', PermissionGroupController::class);
 });
 
 //Route::view('contact','sendmail');
