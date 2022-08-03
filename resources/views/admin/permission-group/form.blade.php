@@ -34,6 +34,10 @@
         <strong>{{ $message }}</strong>
       </span>
     @enderror
+    <p class="form-label"> Create At </p>
+    <p class="form-control"> {{ $permissionGroup->created_at }} </p>
+    <p class="form-label"> Update At </p>
+    <p class="form-control"> {{ $permissionGroup->updated_at }} </p>
   </div>
   <div class="row mt-3">
     <div class="d-flex justify-content-center">

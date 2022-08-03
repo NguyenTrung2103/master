@@ -28,7 +28,7 @@ class PermissionGroupController extends Controller
             abort(404);
         }
 
-        return view('admin.permission-group.show', [
+        return view('admin.permission-group.form', [
             'permissionGroup' => $permissionGroup,
         ]);
     }

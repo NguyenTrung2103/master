@@ -38,9 +38,9 @@
 
         
     </table>
-    <div class="pagination-sm">
+    
     {{ $permissionGroups->links() }}
-    </div>
+    
   </div>
 </div>
 
