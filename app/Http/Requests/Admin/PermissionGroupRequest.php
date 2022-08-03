@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class PermissionGroupRequests extends FormRequest
+class PermissionGroupRequest extends FormRequest
 {
     public function authorize()
     {

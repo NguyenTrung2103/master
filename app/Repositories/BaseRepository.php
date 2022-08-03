@@ -6,7 +6,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected $model;
 
-    public function paginate(array $input = [], $perPage = 5)
+    public function paginate(array $input = [], $perPage = 10)
     {
         $query = $this->model->query();
 
@@ -20,7 +20,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function findById($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->find($id);
     }
 
     public function deleteById($id)

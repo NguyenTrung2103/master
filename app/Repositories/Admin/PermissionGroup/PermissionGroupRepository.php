@@ -11,8 +11,4 @@ class PermissionGroupRepository extends BaseRepository implements PermissionGrou
     {
         $this->model = $model;
     }
-    // public function getPermissionGrop()
-    // {
-    //     return $this->model->take(5)->get();
-    // }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PermissionGroupRequests;
+use App\Http\Requests\Admin\PermissionGroupRequest;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
 
 class PermissionGroupController extends Controller
@@ -24,7 +24,9 @@ class PermissionGroupController extends Controller
 
     public function show($id)
     {
-        $permissionGroup = $this->permissionGroupRepository->findById($id);
+        if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
+            abort(404);
+        }
 
         return view('admin.permission-group.show', [
             'permissionGroup' => $permissionGroup,
@@ -33,14 +35,16 @@ class PermissionGroupController extends Controller
 
     public function edit($id)
     {
-        $permissionGroup = $this->permissionGroupRepository->findById($id);
+        if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
+            abort(404);
+        }
 
-        return view('admin.permission-group.edit', [
+        return view('admin.permission-group.form', [
             'permissionGroup' => $permissionGroup,
         ]);
     }
 
-    public function update(PermissionGroupRequests $request, $id)
+    public function update(PermissionGroupRequest $request, $id)
     {
         $this->permissionGroupRepository->save($request->validated(), ['id' => $id]);
 
@@ -56,10 +60,10 @@ class PermissionGroupController extends Controller
 
     public function create()
     {
-        return view('admin.permission-group.create');
+        return view('admin.permission-group.form');
     }
 
-    public function store(PermissionGroupRequests $request)
+    public function store(PermissionGroupRequest $request)
     {
         $this->permissionGroupRepository->save($request->validated());
 
