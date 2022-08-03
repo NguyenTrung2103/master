@@ -1,6 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('content')
+
 <div class="container-fluid">
   <div class="d-flex justify-content-between">
     <p style="font-weight: bold;">Permission Group List</p>
@@ -37,7 +38,7 @@
 
         
     </table>
-    <div>
+    <div class="pagination-sm">
     {{ $permissionGroups->links() }}
     </div>
   </div>
