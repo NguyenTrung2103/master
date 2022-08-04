@@ -12,7 +12,7 @@ class Permission extends Model
     protected $fillable = [
         'name',
         'key',
-        'permission_group_id'
+        'permission_group_id',
     ];
 
     public function permissionGroup()

@@ -3,26 +3,27 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Admin\PermissionRequests;
-use App\Http\Requests\Admin\PermissionGroupRequest;
 use App\Repositories\Admin\Permission\PermissionRepositoryInterface as PermissionRepository;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
 
 class PermissionController extends Controller
 {
     protected $permissionRepository;
+
     protected $permissionGroupRepository;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(PermissionRepository $permissionRepository,PermissionGroupRepository $permissionGroupRepository)
+    public function __construct(PermissionRepository $permissionRepository, PermissionGroupRepository $permissionGroupRepository)
     {
-        $this->permissionRepository = $permissionRepository; 
+        $this->permissionRepository = $permissionRepository;
         $this->permissionGroupRepository = $permissionGroupRepository;
     }
+
     public function index()
     {
         return view('admin.permission.index', [
@@ -37,7 +38,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('admin.permission.form',[
+        return view('admin.permission.form', [
             'permissionGroups' => $this->permissionGroupRepository->getAll(),
         ]);
     }
