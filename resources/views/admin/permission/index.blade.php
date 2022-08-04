@@ -1,55 +1,55 @@
 @extends('layouts.admin.master')
 @section('content')
-<div class="col-md-9">
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <h1 style="font-weight: bold;">Permission List</h1>
     <div>
-        <h1>ListPermission</h1>
-        <a href="/admin/role/create" class="btn btn-new">+Addnew</a>
+      <a href="{{ route('admin.permission.create') }}" class="btn btn-primary">Create</a>
     </div>
+  </div>
+  <div class="table-responsive">
     <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">PermissionId</th>
-            <th scope="col">PermissionName</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Admin</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>User</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Banned</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-            </tr>
-        </tbody>
-      </table>
+        <tr>
+            <th> Name </th>
+            <th> Key </th>
+            <th> Permission Group </th>
+            <th> Action </th>
+        </tr>
+        @if(!empty($permissions))
+        @foreach($permissions as $permission)
+        <tr>
+            <td>
+                <span class="cat-links">
+                    {{ $permission->name }}
+                </span>
+            </td>
+            <td>
+                <span class="cat-links">
+                    {{ $permission->key }}
+                </span>
+            </td>
+            <td>
+                <span class="cat-links">
+                {{ $permission->permissionGroup->name ?? 'None' }}
+                </span>
+                    
+                
+            </td>
+            <td>
+                <a href="{{ route('admin.permission.show', $permission->id) }}" class="btn btn-success"> Show </a>
+                <a href="{{ route('admin.permission.edit', $permission->id) }}" class="btn btn-primary"> Edit </a>
+                <form class="d-inline" method="post" action="{{ route('admin.permission.destroy', $permission->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger"> Delete </button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+        @endif
+
+        {{ $permissions->links() }}
+    </table>
+  </div>
 </div>
-</div>
-<nav aria-label="Page navigation example">
-<ul class="pagination">
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
-    </a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item active" aria-current="page">
-    <a class="page-link" href="#">2</a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
-    </a>
-  </li>
-</ul>
-</nav>
 @endsection
