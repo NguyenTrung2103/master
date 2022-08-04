@@ -50,15 +50,22 @@ class LoginController extends Controller
     {
         $credentials = $request->getCredential();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            return redirect($this->redirectPath());
+        if (! Auth::attempt($credentials)) {
+            return back()->with(
+                'message',
+                'username or password is incorrect'
+            );
         }
 
-        return back()->with(
-            'message',
-            'username or password is incorrect'
-        );
+        if (! Auth::user()->hasVerifiedEmail()) {
+            return back()->with(
+                'message',
+                'you need to verify your email first!'
+            );
+        }
+
+        $request->session()->regenerate();
+
+        return redirect($this->redirectPath());
     }
 }
