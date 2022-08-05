@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RoleRequests extends FormRequest
 {
@@ -13,7 +14,7 @@ class RoleRequests extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,9 @@ class RoleRequests extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => [
+                'required', Rule::unique('roles')->ignore($this->role),
+            ],
         ];
     }
 }

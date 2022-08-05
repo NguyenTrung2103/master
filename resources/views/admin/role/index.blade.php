@@ -1,56 +1,45 @@
 @extends('layouts.admin.master')
 @section('content')
-<div class="col-md-9">
+<div class="container-fluid">
+  <div class="d-flex justify-content-between">
+    <p style="font-weight: bold;">Role List</p>
     <div>
-        <h1>ListRole</h1>
-        <a href="/admin/role/create" class="btn btn-new">+Addnew</a>
+      <a href="{{ route('admin.role.create') }}" class="btn btn-primary">Create</a>
     </div>
+  </div>
+  <div class="table-responsive">
     <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">RoleID</th>
-            <th scope="col">RoleName</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Boss</td>
-            <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Manger</td>
-            <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Member</td>
-            <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-<nav aria-label="Page navigation example">
-<ul class="pagination">
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
-    </a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item active" aria-current="page">
-    <a class="page-link" href="#">2</a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
-    </a>
-  </li>
-</ul>
-</nav>
-</div>
+        <tr>
+            <th> Name </th>
+            <th> Action </th>
+        </tr>
+        @if(!empty($roles))
+        @foreach($roles as $role)
+        <tr>
+            <td>
+                <p>
+                    {{ $role->name }}
+                </p>
+            </td>
+            <td>
+                <a href="{{ route('admin.role.show', $role->id) }}" class="btn btn-success"> Show </a>
+                <a href="{{ route('admin.role.edit', $role->id) }}" class="btn btn-primary"> Edit </a>
+                <form class="d-inline" method="post" action="{{ route('admin.role.destroy', $role->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger"> Delete </button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+        @endif
+
+        
+    </table>
+    
+    {{ $roles->links() }}
+    
+  </div>
 </div>
 
 @endsection

@@ -3,18 +3,28 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\RoleRequests;
+use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
 
 class RoleController extends Controller
 {
+    protected $roleRepository;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(RoleRepository $roleRepository)
+    {
+        $this->roleRepository = $roleRepository;
+    }
+
     public function index()
     {
-        return view('admin.role.index');
+        return view('admin.role.index', [
+            'roles' => $this->roleRepository->paginate(),
+        ]);
     }
 
     /**
@@ -24,7 +34,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.role.create');
+        return view('admin.role.form');
     }
 
     /**
@@ -33,9 +43,11 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequests $request)
     {
-        //
+        $this->roleRepository->save($request->validated());
+
+        return redirect()->route('admin.role.index');
     }
 
     /**
@@ -46,7 +58,13 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        if (! $role = $this->roleRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.role.form', [
+            'roles' => $role,
+        ]);
     }
 
     /**
@@ -57,7 +75,13 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (! $role = $this->roleRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.role.form', [
+            'roles' => $role,
+        ]);
     }
 
     /**
@@ -67,9 +91,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequests $request, $id)
     {
-        //
+        $this->roleRepository->save($request->validated(), ['id' => $id]);
+
+        return redirect()->route('admin.role.index');
     }
 
     /**
@@ -80,6 +106,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->roleRepository->deleteById($id);
+
+        return redirect()->route('admin.role.index');
     }
 }
