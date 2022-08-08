@@ -36,12 +36,7 @@
     @enderror
   </div>
   @php
-    $selected = collect([]);
-    if (!empty(old('permission'))) {
-      $selected = collect(old('permission', []));
-    } else if (!empty($role)) {
-      $selected = $role->permissions;
-    }
+    $selected = !empty(old('permission')) ? collect(old('permission', [])) : ($role->permissions ?? collect([]));
   @endphp
   <div class="container-fluid mt-3">
   <label for="" class="form-label"> Permission Groups </label>

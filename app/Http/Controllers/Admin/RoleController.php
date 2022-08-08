@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\RoleRequests;
+use App\Http\Requests\Admin\RoleRequest;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
 use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
 use Illuminate\Support\Facades\DB;
+use App\Models\Role;
 
 class RoleController extends Controller
 {
@@ -28,7 +29,7 @@ class RoleController extends Controller
     public function index()
     {
         return view('admin.role.index', [
-            'roles' => $this->roleRepository->paginate(),
+         'roles' =>  $roles = Role::with('rolesPermissions')->paginate(),
         ]);
     }
 
@@ -50,20 +51,21 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequests $request)
+    public function store(RoleRequest $request)
     {
         DB::beginTransaction();
         try {
             $role = $this->roleRepository->save($request->validated());
             $role->rolesPermissions()->sync($request->input('permision'));
             DB::commit();
+            return redirect()->route('admin.role.index');
         } catch (Exception) {
             DB::rollback();
 
             return redirect()->back();
         }
 
-        return redirect()->route('admin.role.index');
+        
     }
 
     /**
@@ -108,21 +110,25 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequests $request, $id)
+    public function update(RoleRequest $request, $id)
     {
+        
         DB::beginTransaction();
 
+        
         try {
             $role = $this->roleRepository->save($request->validated(), ['id' => $id]);
-            $role->rolesPermissions()->sync($request->input('permission'));
+            $role->rolesPermissions()->sync($request->input('permission')); 
+            
             DB::commit();
+            return redirect()->route('admin.role.index');
         } catch (Exception) {
             DB::rollback();
 
             return redirect()->back();
         }
 
-        return redirect()->route('admin.role.index');
+        
     }
 
     /**
@@ -139,12 +145,13 @@ class RoleController extends Controller
             $this->roleRepository->findById($id)->rolesPermissions()->detach();
             $this->roleRepository->deleteById($id);
             DB::commit();
+            return redirect()->route('admin.role.index');
         } catch (Exception) {
             DB::rollback();
 
             return redirect()->back();
         }
 
-        return redirect()->route('admin.role.index');
+        
     }
 }
