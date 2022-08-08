@@ -1,11 +1,6 @@
 @extends('layouts.admin.master')
 
 @section('content')
-@if (Session::has('error'))
-<div class="alert alert-danger" role="alert">
-  {{ session('error') }}
-</div>
-@endif
 @if (empty($roles))
 <form class="container-fluid" method="post" action="{{ route('admin.role.store') }}">
   @csrf
