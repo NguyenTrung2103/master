@@ -11,6 +11,7 @@
     <table class="table">
         <tr>
             <th> Name </th>
+            <th> Permission Count </th>
             <th> Action </th>
         </tr>
         @if(!empty($roles))
@@ -19,6 +20,11 @@
             <td>
                 <p>
                     {{ $role->name }}
+                </p>
+            </td>
+            <td>
+                <p>
+                    {{ $role->rolesPermissions->count() }}
                 </p>
             </td>
             <td>

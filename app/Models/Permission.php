@@ -10,9 +10,11 @@ class Permission extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'name',
         'key',
         'permission_group_id',
+        'role_id',
     ];
 
     public function permissionGroup()
