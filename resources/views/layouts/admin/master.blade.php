@@ -17,7 +17,6 @@
    </div>
    @include('layouts.admin.partitions.footer')
 </body>
-<style>
-     
-</style>
+
+
 </html>

@@ -70,3 +70,7 @@ th{
         width: 110px;
         border-radius: 5px
     }
+  
+
+.delete { cursor: pointer; color: #00A }
+.isDeleted { text-decoration:line-through }
