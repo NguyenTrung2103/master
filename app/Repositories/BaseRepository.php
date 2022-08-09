@@ -6,6 +6,11 @@ abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected $model;
 
+    public function with($relations)
+    {
+        return $this->model->with($relations);
+    }
+
     public function getAll()
     {
         return $this->model->all();

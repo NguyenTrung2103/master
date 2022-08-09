@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoleRequest;
-use App\Models\Role;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
 use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +28,7 @@ class RoleController extends Controller
     public function index()
     {
         return view('admin.role.index', [
-            'roles' => $roles = Role::with('rolesPermissions')->paginate(),
+            'roles' => $this->roleRepository->with('rolesPermissions')->paginate(),
         ]);
     }
 
@@ -41,7 +40,7 @@ class RoleController extends Controller
     public function create()
     {
         return view('admin.role.form', [
-            'permissionGroups' => $this->permissionGroupRepository->getAll(),
+            'permissionGroups' => $this->permissionGroupRepository->with('permissions')->get(),
         ]);
     }
 
