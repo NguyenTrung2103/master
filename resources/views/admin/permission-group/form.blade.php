@@ -6,17 +6,17 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Create permission group: </h3>
+      <h3> {{__('messages.createPermissionList')}}: </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('admin.permission-group.update', $permissionGroup->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Edit permission group: </h3>
+      <h3> {{__('messages.editPermissionGroup')}}: </h3>
 @endif
       <a href="{{ route('admin.permission-group.index') }}" class="btn btn-primary">
-        Back
+      {{__('messages.back')}}
       </a>
     </div>
   </div>
@@ -31,7 +31,7 @@
   </div>
   @endif
   <div class="container-fluid">
-    <label for="name" class="form-label"> Name </label>
+    <label for="name" class="form-label"> {{__('messages.name')}} </label>
     <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" value="{{ old('name', $permissionGroup->name ?? '') }}">
     @error('name')
       <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
   <div class="row mt-3">
     <div class="d-flex justify-content-center">
       <button type="submit" class="btn btn-primary">
-        Save
+      {{__('messages.save')}}
       </button>
     </div>
   </div>

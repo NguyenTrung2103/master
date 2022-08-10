@@ -2,18 +2,18 @@
 @section('content')
 <div class="container">
   <div class="d-flex justify-content-between">
-    <h1 style="font-weight: bold;">Permission List</h1>
+    <h1 style="font-weight: bold;">{{__('messages.permissionlist')}}</h1>
     <div>
-      <a href="{{ route('admin.permission.create') }}" class="btn btn-primary">Create</a>
+      <a href="{{ route('admin.permission.create') }}" class="btn btn-primary">{{__('messages.create')}}</a>
     </div>
   </div>
   <div class="table-responsive">
     <table class="table">
         <tr>
-            <th> Name </th>
-            <th> Key </th>
-            <th> Permission Group </th>
-            <th> Action </th>
+            <th> {{__('messages.name')}} </th>
+            <th> {{__('messages.key')}} </th>
+            <th> {{__('messages.permissionGroup')}} </th>
+            <th> {{__('messages.action')}} </th>
         </tr>
         @if(!empty($permissions))
         @foreach($permissions as $permission)
@@ -36,10 +36,10 @@
                 
             </td>
             <td>
-                <a href="{{ route('admin.permission.show', $permission->id) }}" class="btn btn-success"> Show </a>
-                <a href="{{ route('admin.permission.edit', $permission->id) }}" class="btn btn-primary"> Edit </a>
-                <a class="btn btn-danger delete " > Delete </a>
-                <form class="d-inline" method="post" action="{{ route('admin.permission.destroy', $permission->id) }}">
+                <a href="{{ route('admin.permission.show', $permission->id) }}" class="btn btn-success"> {{__('messages.show')}} </a>
+                <a href="{{ route('admin.permission.edit', $permission->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
+                <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
+                <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.permission.destroy', $permission->id) }}">
                     @csrf
                     @method('DELETE')
                     

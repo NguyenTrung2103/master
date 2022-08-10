@@ -6,17 +6,17 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Create role: </h3>
+      <h3> {{__('messages.createRole')}}: </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('admin.role.update', $roles->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Edit role: </h3>
+      <h3> {{__('messages.editRole')}}: </h3>
 @endif
       <a href="{{ route('admin.role.index') }}" class="btn btn-primary">
-        Back
+      {{__('messages.back')}}
       </a>
     </div>
   </div>
@@ -27,7 +27,7 @@
   </div>
   @endif
   <div class="container-fluid">
-    <label for="name" class="form-label"> Name </label>
+    <label for="name" class="form-label"> {{__('messages.name')}} </label>
     <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="" value="{{ old('name', $roles->name ?? '') }}">
     @error('name')
       <span class="invalid-feedback" role="alert">
@@ -39,7 +39,7 @@
     $selected = !empty(old('permission')) ? collect(old('permission', [])) : ($role->permissions ?? collect([]));
   @endphp
   <div class="container-fluid mt-3">
-  <label for="" class="form-label"> Permission Groups </label>
+  <label for="" class="form-label"> {{__('messages.permissionGroup')}} </label>
   @if(!empty($permissionGroups))
     @foreach($permissionGroups as $permissionGroup)
       <div class="container-fluid border rounded my-2 px-0 py-3 bg-white shadow-sm">
@@ -64,7 +64,7 @@
   <div class="row mt-3">
     <div class="d-flex justify-content-center">
       <button type="submit" class="btn btn-primary">
-        Save
+      {{__('messages.save')}}
       </button>
     </div>
   </div>

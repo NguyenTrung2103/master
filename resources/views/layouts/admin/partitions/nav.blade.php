@@ -9,26 +9,32 @@
         <div class="collapse navbar-collapse" id="navbarsExample07XL">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="#">{{__('messages.home')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">{{__('messages.link')}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{__('messages.disabled')}}</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown07XL" data-bs-toggle="dropdown" aria-expanded="false">{{__('messages.dropdown')}}</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown07XL">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">{{__('messages.action')}}</a></li>
+                        <li><a class="dropdown-item" href="#">{{__('messages.another')}}</a></li>
+                        <li><a class="dropdown-item" href="#">{{__('messages.some')}}</a></li>
                     </ul>
                 </li>
             </ul>
             <form>
-                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                <input class="form-control" type="text" placeholder="{{__('messages.search')}}" aria-label="Search">
             </form>
+            <a href="{{ route('locale.setting', 'en') }}">
+  EN
+</a>
+<a href="{{ route('locale.setting', 'vn') }}">
+  VN
+</a>
         </div>
     </div>
 </nav>
