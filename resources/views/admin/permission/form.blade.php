@@ -5,14 +5,14 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{__('messages.createPermission')}}: </h3>
+      <h3> {{__('permission.createPermission')}}: </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('admin.permission.update', $permission->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{__('messages.editPermission')}}: </h3>
+      <h3> {{__('permission.editPermission')}}: </h3>
 @endif
       <a href="{{ route('admin.permission.index') }}" class="btn btn-primary">
       {{__('messages.back')}}
@@ -56,7 +56,7 @@
     }
   @endphp
   <div class="container-fluid">
-    <label for="permission_group_id" class="form-label"> {{__('messages.permissionGroup')}} </label>
+    <label for="permission_group_id" class="form-label"> {{__('permission.permissionGroup')}} </label>
     <select name="permission_group_id" id="permission_group_id" class="form-select @error('permission_group_id') is-invalid @enderror">
       @if (empty($selected))
         <option value="" selected disabled hidden> Select a permission group </option>

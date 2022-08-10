@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
   <div class="d-flex justify-content-between">
-    <p style="font-weight: bold;">{{__('messages.roleList')}}</p>
+    <p style="font-weight: bold;">{{__('role.roleList')}}</p>
     <div>
       <a href="{{ route('admin.role.create') }}" class="btn btn-primary">{{__('messages.create')}}</a>
     </div>

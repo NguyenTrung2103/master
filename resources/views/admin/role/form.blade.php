@@ -6,14 +6,14 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{__('messages.createRole')}}: </h3>
+      <h3> {{__('role.createRole')}}: </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('admin.role.update', $roles->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{__('messages.editRole')}}: </h3>
+      <h3> {{__('role.editRole')}}: </h3>
 @endif
       <a href="{{ route('admin.role.index') }}" class="btn btn-primary">
       {{__('messages.back')}}

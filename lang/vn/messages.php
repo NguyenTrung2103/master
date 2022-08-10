@@ -37,5 +37,6 @@ return [
     'permissionCount' => 'Số Lượng Quyền',
     'editRole' => 'Chỉnh Sửa Vai Trò',
     'createRole' => 'Tạo Mới Vai Trò',
+    'permissionGroupList'=>'Danh Sách Nhóm Quyền',
 
 ];

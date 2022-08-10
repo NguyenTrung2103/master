@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
   <div class="d-flex justify-content-between">
-    <h1 style="font-weight: bold;">{{__('messages.permissionlist')}}</h1>
+    <h1 style="font-weight: bold;">{{__('permission.permissionlist')}}</h1>
     <div>
       <a href="{{ route('admin.permission.create') }}" class="btn btn-primary">{{__('messages.create')}}</a>
     </div>

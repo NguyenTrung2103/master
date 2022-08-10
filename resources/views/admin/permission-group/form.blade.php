@@ -6,14 +6,14 @@
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{__('messages.createPermissionList')}}: </h3>
+      <h3> {{__('permission-group.createPermissionList')}}: </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('admin.permission-group.update', $permissionGroup->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> {{__('messages.editPermissionGroup')}}: </h3>
+      <h3> {{__('permission-group.editPermissionGroup')}}: </h3>
 @endif
       <a href="{{ route('admin.permission-group.index') }}" class="btn btn-primary">
       {{__('messages.back')}}

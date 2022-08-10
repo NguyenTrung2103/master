@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
   <div class="d-flex justify-content-between">
-    <p style="font-weight: bold;">{{__('messages.permissionGroupList')}}</p>
+    <p style="font-weight: bold;">{{__('permission-group.permissionGroupList')}}</p>
     <div>
       <a href="{{ route('admin.permission-group.create') }}" class="btn btn-primary">{{__('messages.create')}}</a>
     </div>
