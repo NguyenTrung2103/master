@@ -26,10 +26,10 @@
             <td>
                 <a href="{{ route('admin.permission-group.show', $permissionGroup->id) }}" class="btn btn-success"> Show </a>
                 <a href="{{ route('admin.permission-group.edit', $permissionGroup->id) }}" class="btn btn-primary"> Edit </a>
+                <a class="btn btn-danger delete " > Delete </a>
                 <form class="d-inline" method="post" action="{{ route('admin.permission-group.destroy', $permissionGroup->id) }}">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger"> Delete </button>
                 </form>
             </td>
         </tr>
