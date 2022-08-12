@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify'])->group(function () {
+Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify', 'locale'])->group(function () {
     Route::get('/mail', [UserContrller::class, 'sendMail'])->name('admin.sendmail');
     Route::post('/user/send', [UserContrller::class, 'sendMailUser'])->name('user.send');
     Route::resource('user', UserContrller::class);
@@ -43,3 +43,8 @@ Route::group(['middleware' => ['throttle:6,1']], function () {
     Route::post('/email/verify/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 });
+Route::get('set-locale/{locale}', function ($locale) {
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->middleware('locale')->name('locale.setting');

@@ -55,7 +55,7 @@ class RoleController extends Controller
         DB::beginTransaction();
         try {
             $role = $this->roleRepository->save($request->validated());
-            $role->rolesPermissions()->sync($request->input('permision'));
+            $role->rolesPermissions()->sync($request->input('permission'));
             DB::commit();
 
             return redirect()->route('admin.role.index');

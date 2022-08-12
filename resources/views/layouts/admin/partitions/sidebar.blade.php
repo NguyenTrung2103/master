@@ -3,20 +3,20 @@
         <div class="menu">
         <h2>
           <span>
-            System
+          {{__('messages.system')}}
           </span>
         </h2>
-          <a target="_top" href="">User management</a>
-          <a href="">Role management</a>
-          <a href="/admin/permission">Permssion management</a>
+          <a target="_top" href="{{ route('admin.user.index') }}">{{__('messages.user')}}</a>
+          <a href="{{ route('admin.role.index') }}">{{__('messages.role')}}</a>
+          <a href="{{ route('admin.permission.index') }}">{{__('messages.permission')}}</a>
         <br>
         <h2>
           <span>
-            Catalog
+          {{__('messages.catalog')}}
           </span>
         </h2>
-          <a target="_top" href="">Product management</a>
-          <a href="">Category management</a>
+          <a target="_top" href="{{ route('admin.product.index') }}">{{__('messages.product')}}</a>
+          <a href="{{ route('admin.category.index') }}">{{__('messages.category')}}</a>
         
         </div>
       

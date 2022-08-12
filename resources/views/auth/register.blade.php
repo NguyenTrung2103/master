@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <h3 class="card-header text-center">Register User</h3>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="mb-3 row">
                             <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('User Name') }}</label>
 
                             <div class="col-md-6">
@@ -79,7 +79,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark btn-block">
                                     {{ __('Register') }}
                                 </button>
                             </div>
