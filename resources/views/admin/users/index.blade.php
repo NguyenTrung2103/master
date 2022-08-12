@@ -1,58 +1,61 @@
 @extends('layouts.admin.master')
 @section('content')
-<div class="col-md-9 mb-3">
-  <div class="row">
-  @if ($errors->any())
-  <div class="alert alert-danger">
-      <ul>
-          @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-          @endforeach
-      </ul>
-  </div>
-@endif
-        <div>
-            <h1>UserList</h1>
-            <a href="{{ route('admin.user.create')}}" class="btn btn-new">+Addnew</a>
-            <a href="" class="btn btn-new">Send mail</a>
-        </div>
+<div class="container">
+  <div class="d-flex justify-content-between">
+    <h1 style="font-weight: bold;">{{__('permission.permissionlist')}}</h1>
+    <div>
+      <a href="{{ route('admin.permission.create') }}" class="btn btn-primary">{{__('button.create')}}</a>
     </div>
-<table class="table table-bordered">
-    <thead>
-      <tr>
-        <th scope="col">Avatar</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      @if ($users)
-          @foreach ($users as $key => $value)
-              <tr>
-                <td><img width="30px" src="https://i.imgur.com/s6l2a1U.png"></td>
-                <td>{{ $value['name'] }}</td>
-                <td>{{ $value['email'] }}</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-              </tr>
-          @endforeach
-      @endif
-    </tbody>
-  </table>
-  <div class="col-md-12 text-center">
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link"><</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="#">2</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">></a>
-      </li>
-    </ul>
+  </div>
+  <div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th> {{__('User.userName')}} </th>
+            <th> {{__('User.userEmail')}} </th>
+            <th> {{__('User.userPhone')}} </th>
+            <th> {{__('User.userRole')}} </th>
+            <th> {{__('messages.action')}} </th>
+        </tr>
+        @if(!empty($users))
+        @foreach($users as $user)
+        <tr>
+            <td>
+                <span class="cat-links">
+                    {{ $user->name }}
+                </span>
+            </td>
+            <td>
+                <span class="cat-links">
+                    {{ $user->email }}
+                </span>
+            </td>
+            <td>
+                <span class="cat-links">
+                {{ $user->phone }}
+                </span>  
+            </td>
+            <td>
+                <span class="cat-links">
+                {{ $user->role->name  ?? 'None' }}
+                </span>  
+            </td>
+            <td>
+                <a href="{{ route('admin.permission.show', $user->id) }}" class="btn btn-success"> {{__('messages.show')}} </a>
+                <a href="{{ route('admin.permission.edit', $user->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
+                <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
+                <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.permission.destroy', $user->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    
+                </form>
+            </td>
+        </tr>
+        @endforeach
+        @endif
+
+       
+    </table>
+    {{ $users->links() }}
   </div>
 </div>
 @endsection
