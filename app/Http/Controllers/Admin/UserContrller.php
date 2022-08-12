@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Http\Requests\SendMailUserProfileRequest;
+use App\Repositories\Admin\User\UserRepositoryInterface as UserRepository;
 use App\Services\MailService;
 use Illuminate\Support\Facades\Session;
 
 class UserContrller extends Controller
 {
+    protected $userRepository;
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,9 @@ class UserContrller extends Controller
      */
     public function index()
     {
-        return view('admin.users.index', ['users' => $this->getUsers()]);
+        return view('admin.users.index', [
+            'users' => $this->userRepository->paginate(),
+        ]);
     }
 
     /**
@@ -52,9 +57,10 @@ class UserContrller extends Controller
 
     protected $file;
 
-    public function __construct(MailService $mailService)
+    public function __construct(MailService $mailService, UserRepository $userRepository)
     {
         $this->mailService = $mailService;
+        $this->userRepository = $userRepository;
     }
 
     public function sendMailUser(SendMailUserProfileRequest $request)

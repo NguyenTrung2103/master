@@ -50,6 +50,20 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->morphedByMany(Tag::class);
     }
 
+    public function hasPermission(Permission $permission)
+    {
+        return $this->hasRoles($permission->roles);
+    }
+
+    public function hasRoles($roles)
+    {
+        if (is_array($roles) || is_object($roles)) {
+            return $roles->intersect($this->roles)->count();
+        }
+
+        return $this->roles->contains('name', $roles);
+    }
+
     public function messages()
     {
         return $this->hasMany(Messages::class);
@@ -57,7 +71,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'users_roles');
     }
 
     public function hasVerifiedEmail()

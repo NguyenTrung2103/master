@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
-use App\Models\UsersRole;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UsersRoleSeed extends Seeder
 {
@@ -17,14 +16,18 @@ class UsersRoleSeed extends Seeder
      */
     public function run()
     {
-        UsersRole::factory()
-            ->count(16)
-            ->state(new Sequence(
-                fn () => [
-                    'user_id' => User::all()->random(),
-                    'roles_id' => Role::all()->random(),
-                ],
-            ))
-            ->create();
+        $users = User::all();
+        $roles = Role::all();
+
+        if ($role = $roles->firstWhere('name', 'Administrator')) {
+            if ($user = $users->firstWhere('name', 'root')) {
+                DB::table('users_roles')->insert([
+                    'user_id' => $user->id,
+                    'role_id' => $role->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }
