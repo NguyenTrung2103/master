@@ -6,10 +6,12 @@
           {{__('messages.system')}}
           </span>
         </h2>
+        @can('view-permission-group')
           <a target="_top" href="{{ route('admin.user.index') }}">{{__('messages.user')}}</a>
           <a href="{{ route('admin.role.index') }}">{{__('messages.role')}}</a>
           <a href="{{ route('admin.permission.index') }}">{{__('messages.permission')}}</a>
           <a href="{{ route('admin.permission-group.index') }}">{{__('messages.permissionGroup')}}</a>
+        @endcan
         <br>
         <h2>
           <span>

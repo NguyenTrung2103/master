@@ -18,7 +18,7 @@ class PermissionGroupController extends Controller
 
     public function index()
     {
-        Gate::authorize('view-any-permission-group');
+        Gate::authorize('view-permission-group');
 
         return view('admin.permission-group.index', [
             'permissionGroups' => $this->permissionGroupRepository->paginate(),

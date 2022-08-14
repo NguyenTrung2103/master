@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h1 style="font-weight: bold;">{{__('permission.permissionlist')}}</h1>
     <div>
-      <a href="{{ route('admin.permission.create') }}" class="btn btn-primary">{{__('button.create')}}</a>
+      <a href="{{ route('admin.user.create') }}" class="btn btn-primary">{{__('button.create')}}</a>
     </div>
   </div>
   <div class="table-responsive">
@@ -35,15 +35,22 @@
                 </span>  
             </td>
             <td>
-                <span class="cat-links">
-                {{ $user->role->name  ?? 'None' }}
-                </span>  
+              <select name="" id="">
+                @foreach($user->roles as $role)
+              <option> {{ $role->name }} </option>
+              
+                @endforeach
+              </select>
+              
+              
+                
+                  
             </td>
             <td>
-                <a href="{{ route('admin.permission.show', $user->id) }}" class="btn btn-success"> {{__('messages.show')}} </a>
-                <a href="{{ route('admin.permission.edit', $user->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
+                <a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-success"> {{__('messages.show')}} </a>
+                <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
                 <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
-                <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.permission.destroy', $user->id) }}">
+                <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.user.destroy', $user->id) }}">
                     @csrf
                     @method('DELETE')
                     
