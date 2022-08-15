@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PermissionGroupRequest;
 use App\Repositories\Admin\PermissionGroup\PermissionGroupRepositoryInterface as PermissionGroupRepository;
+use Illuminate\Support\Facades\Gate;
 
 class PermissionGroupController extends Controller
 {
@@ -17,6 +18,8 @@ class PermissionGroupController extends Controller
 
     public function index()
     {
+        Gate::authorize('view-permission-group');
+
         return view('admin.permission-group.index', [
             'permissionGroups' => $this->permissionGroupRepository->paginate(),
         ]);
@@ -24,6 +27,8 @@ class PermissionGroupController extends Controller
 
     public function show($id)
     {
+        Gate::authorize('view-PermissionGroup');
+
         if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
             abort(404);
         }
@@ -35,6 +40,7 @@ class PermissionGroupController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('update-PermissionGroup');
         if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
             abort(404);
         }
@@ -46,6 +52,7 @@ class PermissionGroupController extends Controller
 
     public function update(PermissionGroupRequest $request, $id)
     {
+        Gate::authorize('update-PermissionGroup');
         $this->permissionGroupRepository->save($request->validated(), ['id' => $id]);
 
         return redirect()->route('admin.permission-group.index');
@@ -53,18 +60,21 @@ class PermissionGroupController extends Controller
 
     public function destroy($id)
     {
-        $this->permissionGroupRepository->deleteById($id);
+        Gate::authorize('delete-PermissionGroup');
 
         return redirect()->route('admin.permission-group.index');
     }
 
     public function create()
     {
+        Gate::authorize('create-PermissionGroup');
+
         return view('admin.permission-group.form');
     }
 
     public function store(PermissionGroupRequest $request)
     {
+        Gate::authorize('create-PermissionGroup');
         $this->permissionGroupRepository->save($request->validated());
 
         return redirect()->route('admin.permission-group.index');

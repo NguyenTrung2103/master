@@ -32,7 +32,7 @@
             <a href="{{ route('locale.setting', 'en') }}">
   EN
 </a>
-<a href="{{ route('locale.setting', 'vn') }}">
+<a href="{{ route('locale.setting', 'vi') }}">
   VN
 </a>
         </div>

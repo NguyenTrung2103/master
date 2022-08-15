@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\PermissionGroup;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PremissionGroupSeed extends Seeder
 {
@@ -15,6 +15,16 @@ class PremissionGroupSeed extends Seeder
     public function run()
     {
         // factory(App\Models\Supplide)
-        PermissionGroup::factory(10)->create();
+        DB::table('permission_groups')->insert([
+            [
+                'name' => 'Permission Group',
+            ],
+            [
+                'name' => 'Permission',
+            ],
+            [
+                'name' => 'Role',
+            ],
+        ]);
     }
 }

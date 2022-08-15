@@ -30,7 +30,7 @@
             </td>
             <td>
                 <span class="cat-links">
-                {{ $permission->permissionGroup->name ?? 'None' }}
+                {{ $permission->permissionGroup->name  ?? 'None' }}
                 </span>
                     
                 
@@ -49,8 +49,9 @@
         @endforeach
         @endif
 
-        {{ $permissions->links() }}
+       
     </table>
+    {{ $permissions->links() }}
   </div>
 </div>
 @endsection

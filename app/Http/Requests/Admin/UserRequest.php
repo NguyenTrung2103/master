@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -30,11 +31,32 @@ class UserRequest extends FormRequest
                 'not_regex:/^[@#$%&*]/',
 
             ],
-            'email' => 'required',
-            'address' => 'required',
-            'password' => 'required',
-            'fb' => 'url',
-            'ytb' => 'url',
+            'email' => [
+                'required',
+                'email',
+
+                Rule::unique('users')->ignore($this->user),
+            ],
+            'username' => [
+                'required',
+                'min:2',
+                'max:50',
+                Rule::unique('users')->ignore($this->user),
+            ],
+            'password' => [
+                'required_with:password_confirmation',
+                'min:8',
+                'max:200',
+                'regex:/^[0-9@#$%&*]+$/',
+                'confirmed',
+            ],
+            'role_ids' => [
+                'required',
+                'array',
+            ],
+            'phone' => 'required',
+            'address' => 'nullable',
+
         ];
     }
 }

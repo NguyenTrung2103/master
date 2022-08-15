@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\School;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeed extends Seeder
 {
@@ -16,10 +15,15 @@ class UserSeed extends Seeder
      */
     public function run()
     {
-        User::factory()->count(1)
-        ->state(new Sequence(
-            fn ($sequence) => ['school_id' => School::all()->random()],
-        ))
-        ->create();
+        User::factory()
+            ->state([
+                'name' => 'root',
+                'email' => 'root@gmail.com',
+                'username' => 'root',
+                'password' => Hash::make('123'),
+                'type' => User::TYPES['admin'],
+                'verified_at' => now(),
+            ])
+            ->create();
     }
 }
