@@ -33,7 +33,8 @@ class UserRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                
+                'email',
+
                 Rule::unique('users')->ignore($this->user),
             ],
             'username' => [
@@ -42,32 +43,20 @@ class UserRequest extends FormRequest
                 'max:50',
                 Rule::unique('users')->ignore($this->user),
             ],
-            'role' => [
+            'password' => [
+                'required_with:password_confirmation',
+                'min:8',
+                'max:200',
+                'regex:/^[0-9@#$%&*]+$/',
+                'confirmed',
+            ],
+            'role_ids' => [
                 'required',
                 'array',
             ],
-
-            'address' => 'required',
-            'password' => 'required',
             'phone' => 'required',
-            'school_id' => 'nullable|exists:schools,id',
-            'type' => 'nullable',
-            'parent_id' => 'nullable|exists:users,id',
-            'closed' => 'nullable|boolean',
-            'code' => [
-                'nullable',
-                Rule::unique('users')->ignore($this->user),
-            ],
-            'social_type' => 'nullable|numeric',
-            'social_id' => [
-                'nullable',
-                Rule::unique('users')->ignore($this->user),
-            ],
-            'social_name' => 'nullable',
-            'social_nickname' => 'nullable',
-            'social_avatar' => 'nullable|url',
-            'description' => 'nullable',
-            
+            'address' => 'nullable',
+
         ];
     }
 }

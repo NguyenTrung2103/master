@@ -3,6 +3,7 @@
 @section('content')
 @if (!empty($user))
 <form class="container-fluid" method="post" action="{{ route('admin.user.update', $user->id) }}">
+    
     @method('PUT')
     @csrf
     <div class="d-flex justify-content-between">
@@ -74,7 +75,7 @@
     $selectedRoles = collect(old('role_ids', empty($user) ? [] : $user->roles->pluck('id')->all()));
 @endphp
     <div class="container-fluid">
-        <label for="role_ids" class="form-label"> {{ __('user.role_ids') }} </label>
+        <label for="role_ids" class="form-label"> {{ __('user.role') }} </label>
         @if(!empty($roles))
             <div class="container-fluid">
                 @foreach($roles as $role)

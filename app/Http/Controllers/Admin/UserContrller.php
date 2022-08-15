@@ -5,21 +5,22 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use App\Http\Requests\SendMailUserProfileRequest;
-use App\Repositories\Admin\User\UserRepositoryInterface as UserRepository;
+use App\Models\User;
 use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
+use App\Repositories\Admin\User\UserRepositoryInterface as UserRepository;
 use App\Services\MailService;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Contracts\Validation\Rule;
-use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class UserContrller extends Controller
 {
     protected $userRepository;
+
     protected $roleRepository;
+
     protected $mailService;
+
     protected $file;
 
     /**
@@ -27,15 +28,15 @@ class UserContrller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(MailService $mailService, UserRepository $userRepository,RoleRepository $roleRepository)
+    public function __construct(MailService $mailService, UserRepository $userRepository, RoleRepository $roleRepository)
     {
         $this->mailService = $mailService;
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
     }
+
     public function index()
     {
-        
         return view('admin.users.index', [
             'users' => $this->userRepository->with('roles')->paginate(),
         ]);
@@ -48,9 +49,9 @@ class UserContrller extends Controller
      */
     public function create()
     {
-        return view('admin.users.create',[
+        return view('admin.users.create', [
             'roles' => $this->roleRepository->getAll(),
-            'isShow'=> false,
+            'isShow' => false,
         ]);
     }
 
@@ -66,7 +67,7 @@ class UserContrller extends Controller
         $data['verified_at'] = now();
         $data['type'] = User::TYPES['admin'];
         $data['password'] = Hash::make($data['password']);
-        
+
         DB::beginTransaction();
 
         try {
@@ -92,10 +93,6 @@ class UserContrller extends Controller
     {
         return view('sendmail', ['users' => $this->getUsers()]);
     }
-
-    
-
-    
 
     public function sendMailUser(SendMailUserProfileRequest $request)
     {
@@ -126,8 +123,6 @@ class UserContrller extends Controller
 
     public function show($id)
     {
-        
-
         if (! $user = $this->userRepository->findById($id)) {
             abort(404);
         }
@@ -138,10 +133,9 @@ class UserContrller extends Controller
             'isShow' => true,
         ]);
     }
+
     public function edit($id)
     {
-        
-        
         if (! $user = $this->userRepository->findById($id)) {
             abort(404);
         }
@@ -151,24 +145,22 @@ class UserContrller extends Controller
             'roles' => $this->roleRepository->getAll(),
             'isShow' => false,
         ]);
-        
     }
+
     public function update(UserRequest $request, $id)
     {
-        
-        
         DB::beginTransaction();
 
         try {
             $user = $this->userRepository->save($request->validated(), ['id' => $id]);
-            $user->roles()->sync($request->input('role'));
+            $user->roles()->sync($request->input('role_ids'));
             DB::commit();
 
             return redirect()->route('admin.user.show', $id)->with(
                 'success',
                 __('user.update.success')
             );
-        } catch (Exception) {
+        } catch (\Exception) {
             DB::rollback();
 
             return redirect()->back()->with(
@@ -177,10 +169,9 @@ class UserContrller extends Controller
             );
         }
     }
+
     public function destroy($id)
     {
-        
-
         DB::beginTransaction();
 
         try {
@@ -201,5 +192,4 @@ class UserContrller extends Controller
             );
         }
     }
-
 }
