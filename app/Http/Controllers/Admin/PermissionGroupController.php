@@ -27,7 +27,7 @@ class PermissionGroupController extends Controller
 
     public function show($id)
     {
-        Gate::authorize('view-PermissionGroup');
+        Gate::authorize('view-permission-group');
 
         if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
             abort(404);
@@ -40,7 +40,7 @@ class PermissionGroupController extends Controller
 
     public function edit($id)
     {
-        Gate::authorize('update-PermissionGroup');
+        Gate::authorize('view-permission-group');
         if (! $permissionGroup = $this->permissionGroupRepository->findById($id)) {
             abort(404);
         }
@@ -52,7 +52,7 @@ class PermissionGroupController extends Controller
 
     public function update(PermissionGroupRequest $request, $id)
     {
-        Gate::authorize('update-PermissionGroup');
+        Gate::authorize('view-permission-group');
         $this->permissionGroupRepository->save($request->validated(), ['id' => $id]);
 
         return redirect()->route('admin.permission-group.index');
@@ -60,21 +60,21 @@ class PermissionGroupController extends Controller
 
     public function destroy($id)
     {
-        Gate::authorize('delete-PermissionGroup');
+        Gate::authorize('view-permission-group');
 
         return redirect()->route('admin.permission-group.index');
     }
 
     public function create()
     {
-        Gate::authorize('create-PermissionGroup');
+        Gate::authorize('view-permission-group');
 
         return view('admin.permission-group.form');
     }
 
     public function store(PermissionGroupRequest $request)
     {
-        Gate::authorize('create-PermissionGroup');
+        Gate::authorize('view-permission-group');
         $this->permissionGroupRepository->save($request->validated());
 
         return redirect()->route('admin.permission-group.index');

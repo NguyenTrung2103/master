@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CategoryRequests extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,7 @@ class CategoryRequests extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class CategoryRequests extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', Rule::unique('categories')->ignore($this->category)],
+            'slug' => ['required'],
         ];
     }
 }

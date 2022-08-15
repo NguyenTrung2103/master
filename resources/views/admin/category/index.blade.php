@@ -1,55 +1,63 @@
 @extends('layouts.admin.master')
+
 @section('content')
-<div class="col-md-9">
+
+<div class="container-fluid">
+  <div class="d-flex justify-content-between">
+    <p style="font-weight: bold;">{{__('permission-group.permissionGroupList')}}</p>
     <div>
-        <h1>ListCategory</h1>
-        <a href="/admin/category" class="btn btn-new">+Addnew</a>
+      
+      
+        <a href="{{ route('admin.category.create') }}" class="btn btn-primary">{{__('messages.create')}}</a>
+      
     </div>
+  </div>
+  <div class="table-responsive">
     <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">CategoryId</th>
-            <th scope="col">CategoryName</th>
-            <th scope="col">Action</th>
+        <tr>
+            <th> {{__('messages.name')}} </th>
+            <th> {{__('messages.slug')}} </th>
+            <th> {{__('messages.action')}} </th>
+        </tr>
+        @if(!empty($categories))
+      @foreach($categories as $category)
+      <td>
+            <p>
+              {{ $category->name }}
+            </p>
+            
+          </td>
+          <td>
+            <p>
+              {{ $category->slug }}
+            </p>
+            
+          </td>
+          <td>
+            
+              <a href="{{ route('admin.category.show', $category->id) }}" class="btn btn-success"> {{__('messages.show')}} </a>
+            
+            
+              <a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
+            
+            <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
+              <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.category.destroy', $category->id) }}">
+                @csrf
+                @method('DELETE')
+                
+              </form>
+            
+          </td>
           </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Admin</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>User</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Banned</td>
-                <td><button type="button" class="btn btn-primary">Edit</button> <button type="button" class="btn btn-danger">Delete</button></td>
-            </tr>
-        </tbody>
-      </table>
+          @endforeach
+      @endif
+
+        
+    </table>
+    
+    {{ $categories->links() }}
+    
+  </div>
 </div>
-</div>
-<nav aria-label="Page navigation example">
-<ul class="pagination">
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
-    </a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item active" aria-current="page">
-    <a class="page-link" href="#">2</a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
-    </a>
-  </li>
-</ul>
-</nav>
+
 @endsection
