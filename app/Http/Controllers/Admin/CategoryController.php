@@ -49,7 +49,7 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index')->with(
             'success',
-            __('category.create.success');
+            __('category.create.success'));
     }
 
     /**
@@ -99,7 +99,7 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index')->with(
             'success',
-            __('category.update.success');
+            __('category.update.success'));
     }
 
     /**
@@ -114,6 +114,6 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.category.index')->with(
             'success',
-            __('category.delete.success');
+            __('category.delete.success'));
     }
 }
