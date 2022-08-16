@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id',
         'content',
@@ -28,6 +29,4 @@ class Question extends Model
     {
         return $this->belongsToMany(Exam::class, 'exam_question');
     }
-
-
 }

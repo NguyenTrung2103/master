@@ -3,21 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Repositories\Admin\Category\CategoryRepositoryInterface as CategoryRepository;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\DB;
-
 
 class CategoryController extends Controller
 {
     protected $categoryRepository;
 
-    public function  __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index',[
+        return view('admin.category.index', [
             'categories' => $this->categoryRepository->paginate(),
         ]);
     }
@@ -48,22 +45,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        DB::beginTransaction();
+        $this->categoryRepository->save($request->validated());
 
-        try {
-            $category = $this->categoryRepository->save($request->validated());
-            DB::commit();
-            return redirect()->route('admin.category.show', $category->id);
-        } catch (\Exception) {
-            DB::rollback();
-
-            return redirect()->back()->with(
-                'error',
-                'Exception occured. Please try again later.'
-            );
-        }
-
-       
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -109,22 +93,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
-        DB::beginTransaction();
+        $this->categoryRepository->save($request->validated(), ['id' => $id]);
 
-        try {
-            $this->categoryRepository->save($request->validated(), ['id' => $id]);
-            DB::commit();
-            return redirect()->route('admin.category.show', $id);
-        } catch (\Exception) {
-            DB::rollback();
-
-            return redirect()->back()->with(
-                'error',
-                'Exception occured. Please try again later.'
-            );
-        }
-
-        
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -135,21 +106,8 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        DB::beginTransaction();
+        this->categoryRepository->deleteById($id);
 
-        try {
-            $this->categoryRepository->deleteById($id);
-            DB::commit();
-            return redirect()->route('admin.category.index');
-        } catch (\Exception) {
-            DB::rollback();
-
-            return redirect()->back()->with(
-                'error',
-                'Exception occured. Please try again later.'
-            );
-        }
-
-        
+        return redirect()->route('admin.category.index');
     }
 }

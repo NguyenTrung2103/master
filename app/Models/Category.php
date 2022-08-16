@@ -14,10 +14,12 @@ class Category extends Model
         'name',
         'slug',
     ];
+
     public function questions()
     {
         return $this->hasMany(Question::class, 'category_id');
     }
+
     public function exams()
     {
         return $this->hasMany(Exem::class, 'category_id');

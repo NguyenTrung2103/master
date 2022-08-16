@@ -33,10 +33,10 @@ return
     'password-confirm' => 'Confirm Password',
     'createUser' => 'Create User',
     'update.success' => 'Edit Successfully',
-    'update.error'=>'Edit Failed',
-    'create.success' =>'Create Successfully',
+    'update.error' => 'Edit Failed',
+    'create.success' => 'Create Successfully',
     'create.error' => 'Create Failed',
-    'delete.success' =>'Delete Successfully',
+    'delete.success' => 'Delete Successfully',
     'delete.error' => 'Delete Failed',
 
 ];

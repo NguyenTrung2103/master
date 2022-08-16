@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255)->uinque();
-            $table->string('slug',255)->uinque();
+            $table->string('name', 255)->uinque();
+            $table->string('slug', 255)->uinque();
             $table->unsignedBigInteger('category_id');
             $table->integer('time');
             $table->timestamps();

@@ -44,18 +44,19 @@ class UserRequest extends FormRequest
                 Rule::unique('users')->ignore($this->user),
             ],
             'password' => [
-                'required_with:password_confirmation',
-                'min:8',
+
+                'min:3',
                 'max:200',
-                'regex:/^[0-9@#$%&*]+$/',
-                'confirmed',
+
             ],
             'role_ids' => [
                 'required',
                 'array',
             ],
-            'phone' => 'required',
-            'address' => 'nullable',
+            'role' => [
+                'required',
+                'array',
+            ],
 
         ];
     }

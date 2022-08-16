@@ -91,29 +91,34 @@ class UserContrller extends Controller
 
     public function sendMail()
     {
-        return view('sendmail', ['users' => $this->getUsers()]);
+        return view('sendmail', [
+            'users' => $this->userRepository->getAll(),
+        ]);
     }
 
     public function sendMailUser(SendMailUserProfileRequest $request)
     {
         $targetMail = $request->validated()['email'];
-        $users = $this->getUsers();
-        $path = public_path('uploads');
-        $attachment = null;
-        if ($request->file('attachment')) {
-            $attachment = $request->file('attachment');
-        }
-        if (! strcmp($targetMail, 'all')) {
-            $users->each(function ($user) {
-                $this->mailService->sendUserProfile($user->firstWhere('email'), $this->file);
-            });
+        $fileAttached = $request->validated()['attachment'] ?? null;
+        $users = $this->userRepository->getAll();
 
-            return redirect()->back();
-        }
-        $user = $users->firstWhere('email', $targetMail);
-        $this->mailService->sendUserProfile($user, $attachment);
+        $users = (! strcmp($targetMail, 'all'))
+            ? $users
+            : $users->where('email', $targetMail);
 
-        return redirect()->back()->with('success', 'Mail sent successfully.');
+        try {
+            $users->each(fn ($user) => $this->mailService->sendUserProfile($user, $fileAttached));
+
+            return redirect()->back()->with(
+                'success',
+                __('user.send-mail.success')
+            );
+        } catch (\Exception) {
+            return redirect()->back()->with(
+                'error',
+                __('user.send-mail.error')
+            );
+        }
     }
 
     private function getUsers()
