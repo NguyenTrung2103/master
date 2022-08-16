@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255)->unique();
-            $table->string('slug',255)->uinque();
+            $table->string('name', 255)->unique();
+            $table->string('slug', 255)->uinque();
             $table->timestamps();
         });
     }

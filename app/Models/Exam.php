@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Exam extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id',
         'name',
@@ -20,6 +21,7 @@ class Exam extends Model
     {
         return $this->belongsTo(Category::class, 'id');
     }
+
     public function questions()
     {
         return $this->belongsToMany(Question::class, 'exam_question');

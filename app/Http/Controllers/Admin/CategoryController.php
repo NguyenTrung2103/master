@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\CategoryRequest;
+use App\Repositories\Admin\Category\CategoryRepositoryInterface as CategoryRepository;
 
 class CategoryController extends Controller
 {
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.category.index');
+        return view('admin.category.index', [
+            'categories' => $this->categoryRepository->paginate(),
+        ]);
     }
 
     /**
@@ -24,7 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.category.form');
     }
 
     /**
@@ -33,9 +43,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $this->categoryRepository->save($request->validated());
+
+        return redirect()->route('admin.category.index')->with(
+            'success',
+            __('category.create.success'));
     }
 
     /**
@@ -46,7 +60,13 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        if (! $category = $this->categoryRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.category.show', [
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -57,7 +77,13 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (! $category = $this->categoryRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.category.form', [
+            'categories' => $category,
+        ]);
     }
 
     /**
@@ -67,9 +93,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $this->categoryRepository->save($request->validated(), ['id' => $id]);
+
+        return redirect()->route('admin.category.index')->with(
+            'success',
+            __('category.update.success'));
     }
 
     /**
@@ -80,6 +110,10 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        this->categoryRepository->deleteById($id);
+
+        return redirect()->route('admin.category.index')->with(
+            'success',
+            __('category.delete.success'));
     }
 }
