@@ -47,7 +47,9 @@ class CategoryController extends Controller
     {
         $this->categoryRepository->save($request->validated());
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with(
+            'success',
+            __('category.create.success');
     }
 
     /**
@@ -95,7 +97,9 @@ class CategoryController extends Controller
     {
         $this->categoryRepository->save($request->validated(), ['id' => $id]);
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with(
+            'success',
+            __('category.update.success');
     }
 
     /**
@@ -108,6 +112,8 @@ class CategoryController extends Controller
     {
         this->categoryRepository->deleteById($id);
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->with(
+            'success',
+            __('category.delete.success');
     }
 }
