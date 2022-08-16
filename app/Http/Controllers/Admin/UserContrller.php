@@ -158,7 +158,7 @@ class UserContrller extends Controller
 
         try {
             $user = $this->userRepository->save($request->validated(), ['id' => $id]);
-            $user->roles()->sync($request->input('role_ids'));
+            $user->roles()->sync($request->input('role'));
             DB::commit();
 
             return redirect()->route('admin.user.show', $id)->with(

@@ -2,7 +2,7 @@
 @section('content')
 <div class="container-fluid">
   <div class="d-flex justify-content-between">
-    <p style="font-weight: bold;">{{__('permission-group.permissionGroupList')}}</p>
+    <p style="font-weight: bold;">{{__('category.CategoryList')}}</p>
     <div>
         <a href="{{ route('admin.category.create') }}" class="btn btn-primary">{{__('messages.create')}}</a>  
     </div>

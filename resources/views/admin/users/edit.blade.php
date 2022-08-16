@@ -72,15 +72,15 @@
         @enderror
     </div>
 @php
-    $selectedRoles = collect(old('role_ids', empty($user) ? [] : $user->roles->pluck('id')->all()));
+    $selectedRoles = collect(old('role', empty($user) ? [] : $user->roles->pluck('id')->all()));
 @endphp
     <div class="container-fluid">
-        <label for="role_ids" class="form-label"> {{ __('user.role') }} </label>
+        <label for="role" class="form-label"> {{ __('user.role') }} </label>
         @if(!empty($roles))
             <div class="container-fluid">
                 @foreach($roles as $role)
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="role_ids[]" id="{{ 'chkbox_'.$role->id }}" value="{{ $role->id }}"{{ ($selectedRoles->contains($role->id)) ? ' checked' : '' }}{{ $isShow ? ' readonly' : ''}}>
+                    <input class="form-check-input" type="checkbox" name="role[]" id="{{ 'chkbox_'.$role->id }}" value="{{ $role->id }}"{{ ($selectedRoles->contains($role->id)) ? ' checked' : '' }}{{ $isShow ? ' readonly' : ''}}>
                     <label class="form-check-label" for="{{ 'chkbox_'.$role->id }}">{{ $role->name }}</label>
                 </div>
                 @endforeach

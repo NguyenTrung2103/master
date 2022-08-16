@@ -38,5 +38,5 @@ return
     'create.error' => 'Create Failed',
     'delete.success' => 'Delete Successfully',
     'delete.error' => 'Delete Failed',
-
+    'userList' => 'User List',
 ];

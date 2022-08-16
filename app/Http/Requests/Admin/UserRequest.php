@@ -49,10 +49,7 @@ class UserRequest extends FormRequest
                 'max:200',
 
             ],
-            'role_ids' => [
-                'required',
-                'array',
-            ],
+
             'role' => [
                 'required',
                 'array',

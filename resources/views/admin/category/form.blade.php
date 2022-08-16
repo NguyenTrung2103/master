@@ -1,24 +1,24 @@
 @extends('layouts.admin.master')
 
 @section('content')
-@if (Session::has('error'))
-<div class="alert alert-danger" role="alert">
-  {{ session('error') }}
-</div>
+@if (Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
 @endif
 @if (empty($categories))
 <form class="container-fluid" method="post" action="{{ route('admin.category.store') }}">
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Create permission group: </h3>
+      <h3> Create Category: </h3>
 @else
 <form class="container-fluid" method="post" action="{{ route('admin.category.update', $categories->id) }}">
   @method('PUT')
   @csrf
   <div class="row">
     <div class="d-flex justify-content-between">
-      <h3> Edit permission group: </h3>
+      <h3> Edit Category: </h3>
 @endif
       <a href="{{ route('admin.category.index') }}" class="btn btn-primary">
         Back
