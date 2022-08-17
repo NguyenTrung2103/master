@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\QuestionRequest;
 use App\Repositories\Admin\Category\CategoryRepositoryInterface as CategoryRepository;
 use App\Repositories\Admin\Question\QuestionRepositoryInterface as QuestionRepository;
 use App\Repositories\Admin\Answer\AnswerRepositoryInterface as AnswerRepository;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -64,6 +65,69 @@ class QuestionController extends Controller
             return redirect()->route('admin.question.index')->with('success',
             __('question.create.success'));
 
+    }
+    public function edit($id)
+    {
+        if (! $question = $this->questionRepository->findById($id)) {
+            abort(404);
+        }
+
+        return view('admin.question.edit', [
+            'questions' => $question,
+            'categories' => $this->categoryRepository->getAll(),
+            'answers' => $this->answerRepository->getAll(),
+            
+        ]);
+        
+    }
+    public function update(QuestionRequest $request, $id)
+    {
+        
+        $this->questionRepository->save($request->validated(), ['id' => $id]);
+       
+        $data = $request->except(['content','category_id']);
+        
+        
+
+        
+        for($i = 0; $i <= count($data['answer']); $i++) {
+
+            $input = [
+                'content' => $data['answer'][$i],
+                
+            ];
+    
+            DB::table('answers')->update($input);
+    
+        }
+        
+        return redirect()->route('admin.question.index');
+        
+    }
+
+    public function destroy($id)
+    {
+        $this->questionRepository->deleteById($id);
+
+        return redirect()->route('admin.question.index');
+    }
+    public function show($id)
+    {
+        
+        
+        if (! $question = $this->questionRepository->findById($id)) {
+            abort(404);
+        }
+
+        dd($question->answers);
+
+        return view('admin.question.edit', [
+            'questions' => $question,
+            'categories' => $this->categoryRepository->getAll(),
+            'answers' => $this->answerRepository->getAll(),
+            
+        ]);
+        
     }
 
 }

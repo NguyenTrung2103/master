@@ -71,73 +71,32 @@
   </div>
 
   <div class="container-fluid">
-    <label for="answer_1" class="form-label"> {{__('messages.answer_1')}} </label>
-    <div class="row">
-    <div class="col-11">
-    <input name="answer_1" type="text" class=" form-control @error('answer_1') is-invalid @enderror" id="answer_1" placeholder="" value="{{ old('answer_1', $answers->answer_1 ?? '') }}">
+  @php
+    $selectedAnswers = collect(old('answer', empty($question) ? [] : $question->answers->pluck('id')->all()));
+@endphp
+    <div class="container-fluid">
+        <label for="role" class="form-label"> {{ __('user.role') }} </label>
+        
+        @if(!empty($answers))
+
+            <div class="container-fluid">
+                @foreach($answers as $answer)
+                
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="text" name="answer[]" id="{{ 'chkbox_'.$answer->content }}" value="{{ $answer->content }}"{{ ($selectedAnswers->contains($answer->content)) ? ' checked' : '' }}>
+                @if($answer->correct == true)
+                    <input class=" form-check-input" type="checkbox" name="answer[]" id="{{ 'chkbox_'.$answer->correct }}" value="{{ $answer->correct }}"{{ ($selectedAnswers->contains($answer->correct)) ? ' checked' : '' }}>
+                @else
+                    
+                @endif    
+                </div>
+                @endforeach
+            </div>
+        @endif
     </div>
-    <div class="col-1 align-self-center">
-    <input type="radio" name="correct" id="correct_1" value="0">
-    </div>
-  </div>
-    @error('content')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-    @enderror
   </div>
 
-  <div class="container-fluid">
-    <label for="answer_2" class="form-label"> {{__('messages.answer_2')}} </label>
-    <div class="row">
-    <div class="col-11">
-    <input name="answer_2" type="text" class=" form-control @error('answer_2') is-invalid @enderror" id="answer_2" placeholder="" value="{{ old('answer_2', $answers->answer_2 ?? '') }}">
-    </div>
-    <div class="col-1 align-self-center">
-    <input type="radio" name="correct" id="correct_2" value="1">
-    </div>
-    @error('content')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-    @enderror
-    </div>
-  </div>
   
-
-  <div class="container-fluid">
-    <label for="answer_3" class="form-label"> {{__('messages.answer_3')}} </label>
-    <div class="row">
-    <div class="col-11">
-    <input name="answer_3" type="text" class=" form-control @error('answer_3') is-invalid @enderror" id="answer_3" placeholder="" value="{{ old('answer_3', $answers->answer_3 ?? '') }}">
-    </div>
-    <div class="col-1 align-self-center">
-    <input type="radio" name="correct" id="correct_3" value="2">
-    </div>
-  </div>
-    @error('content')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-    @enderror
-  </div>
-
-  <div class="container-fluid">
-    <label for="answer_4" class="form-label"> {{__('messages.answer_4')}} </label>
-    <div class="row">
-    <div class="col-11">
-    <input name="answer_4" type="text" class=" form-control @error('answer_4') is-invalid @enderror" id="answer_4" placeholder="" value="{{ old('answer_4', $answers->answer_4 ?? '') }}">
-    </div>
-    <div class="col-1 align-self-center">
-    <input type="radio" name="correct" id="correct_4" value="3">
-    </div>
-  </div>
-    @error('content')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-    @enderror
-  </div>
 
   <div class="row mt-3">
     <div class="d-flex justify-content-center">
