@@ -35,42 +35,31 @@ class QuestionController extends Controller
     }
     public function store(QuestionRequest $request)
     {
-        try{
-            $this->validate($request, [
-                
-                'content' => 'required',
-                'category_id' => 'required',
-                'answer_1' => 'required',
-                'answer_2' => 'required',
-                'answer_3' => 'required',
-                'answer_4' => 'required',
-                
-            ]);
-            dd($request);
-            $question = $this->questionRepository->save([
-                
-                'content' => request('content'),
-                'user_id' => auth()->id(),
-                
-            ]);
-            $answer = [];
+            $data = $request->validated();
+            $questionData = [
+                'content' => $data['content'],
+                'category_id' => $data['category_id'],
+            ];
+            $question = $this->questionRepository->save($questionData);
 
-            foreach($answers as $answer) {
-                 $answer[] = new Answer(['name' => $answer]);
-                 }
+            $answerData = [
+                'answer_1' => $data['answer_1'],
+                'answer_2' => $data['answer_2'],
+                'answer_3' => $data['answer_3'],
+                'answer_4' => $data['answer_4'],
+            ];
 
-             $question->answers()->saveMany($answer);
-
-           
+            foreach($answerData as $answerDatum) {
+                $answer = $this->answerRepository->save([
+                    'content' => $answerDatum,
+                    'question_id' => $question->id,
+                    'correct' => false,
+                ]);
+            }
 
             return redirect()->route('admin.question.index')->with('success',
             __('question.create.success'));
-        }
-        catch (\Exception)
-        {
-            return redirect()->back()->with('error',
-            __('question.create.error'));
-        }
+
     }
 
 }
