@@ -30,6 +30,7 @@ class QuestionRequest extends FormRequest
             'answer_2' => 'required',
             'answer_3' => 'required',
             'answer_4' => 'required',
+            'correct' => 'required',
         ];
     }
 }

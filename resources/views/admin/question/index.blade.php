@@ -36,8 +36,8 @@
                 
             </td>
             <td>
-                <a href="{{ route('admin.permission.show', $question->id) }}" class="btn btn-success"> {{__('messages.show')}} </a>
-                <a href="{{ route('admin.permission.edit', $question->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
+                <a href="{{ route('admin.permission.show', $question->id) }}" class="btn btn-success align-self-end"> {{__('messages.show')}} </a>
+                <a href="{{ route('admin.permission.edit', $question->id) }}" class="btn btn-primary align-self-end"> {{__('messages.edit')}} </a>
                 <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
                 <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.permission.destroy', $question->id) }}">
                     @csrf

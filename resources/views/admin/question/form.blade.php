@@ -1,5 +1,10 @@
 @extends('layouts.admin.master')
 @section('content')
+@if (Session::has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
 @if (empty($quesions))
 <form class="container-fluid" method="post" action="{{ route('admin.question.store') }}">
   @csrf
@@ -66,7 +71,14 @@
 
   <div class="container-fluid">
     <label for="answer_1" class="form-label"> {{__('messages.answer_1')}} </label>
-    <input name="answer_1" type="text" class="form-control @error('answer_1') is-invalid @enderror" id="answer_1" placeholder="" value="{{ old('answer_1', $answers->answer_1 ?? '') }}">
+    <div class="row">
+    <div class="col-11">
+    <input name="answer_1" type="text" class=" form-control @error('answer_1') is-invalid @enderror" id="answer_1" placeholder="" value="{{ old('answer_1', $answers->answer_1 ?? '') }}">
+    </div>
+    <div class="col-1 align-self-center">
+    <input type="radio" name="correct" id="correct_1" value="0">
+    </div>
+  </div>
     @error('content')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -76,17 +88,32 @@
 
   <div class="container-fluid">
     <label for="answer_2" class="form-label"> {{__('messages.answer_2')}} </label>
-    <input name="answer_2" type="text" class="form-control @error('answer_2') is-invalid @enderror" id="answer_2" placeholder="" value="{{ old('answer_2', $answers->answer_2 ?? '') }}">
+    <div class="row">
+    <div class="col-11">
+    <input name="answer_2" type="text" class=" form-control @error('answer_2') is-invalid @enderror" id="answer_2" placeholder="" value="{{ old('answer_2', $answers->answer_2 ?? '') }}">
+    </div>
+    <div class="col-1 align-self-center">
+    <input type="radio" name="correct" id="correct_2" value="1">
+    </div>
     @error('content')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
       </span>
     @enderror
+    </div>
   </div>
+  
 
   <div class="container-fluid">
     <label for="answer_3" class="form-label"> {{__('messages.answer_3')}} </label>
-    <input name="answer_3" type="text" class="form-control @error('answer_3') is-invalid @enderror" id="answer_3" placeholder="" value="{{ old('answer_3', $answers->answer_3 ?? '') }}">
+    <div class="row">
+    <div class="col-11">
+    <input name="answer_3" type="text" class=" form-control @error('answer_3') is-invalid @enderror" id="answer_3" placeholder="" value="{{ old('answer_3', $answers->answer_3 ?? '') }}">
+    </div>
+    <div class="col-1 align-self-center">
+    <input type="radio" name="correct" id="correct_3" value="2">
+    </div>
+  </div>
     @error('content')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>
@@ -96,7 +123,14 @@
 
   <div class="container-fluid">
     <label for="answer_4" class="form-label"> {{__('messages.answer_4')}} </label>
-    <input name="answer_4" type="text" class="form-control @error('answer_4') is-invalid @enderror" id="answer_4" placeholder="" value="{{ old('answer_4', $answers->answer_4 ?? '') }}">
+    <div class="row">
+    <div class="col-11">
+    <input name="answer_4" type="text" class=" form-control @error('answer_4') is-invalid @enderror" id="answer_4" placeholder="" value="{{ old('answer_4', $answers->answer_4 ?? '') }}">
+    </div>
+    <div class="col-1 align-self-center">
+    <input type="radio" name="correct" id="correct_4" value="3">
+    </div>
+  </div>
     @error('content')
       <span class="invalid-feedback" role="alert">
         <strong>{{ $message }}</strong>

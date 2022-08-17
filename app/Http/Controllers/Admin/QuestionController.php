@@ -36,6 +36,7 @@ class QuestionController extends Controller
     public function store(QuestionRequest $request)
     {
             $data = $request->validated();
+            
             $questionData = [
                 'content' => $data['content'],
                 'category_id' => $data['category_id'],
@@ -48,13 +49,16 @@ class QuestionController extends Controller
                 'answer_3' => $data['answer_3'],
                 'answer_4' => $data['answer_4'],
             ];
+            $correct = $data['correct'];
 
+            $count = 0;
             foreach($answerData as $answerDatum) {
                 $answer = $this->answerRepository->save([
                     'content' => $answerDatum,
                     'question_id' => $question->id,
-                    'correct' => false,
+                    'correct' => ($count == $correct),
                 ]);
+                $count++;
             }
 
             return redirect()->route('admin.question.index')->with('success',
