@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\QuestionRequest;
 use App\Repositories\Admin\Answer\AnswerRepositoryInterface as AnswerRepository;
 use App\Repositories\Admin\Category\CategoryRepositoryInterface as CategoryRepository;
 use App\Repositories\Admin\Question\QuestionRepositoryInterface as QuestionRepository;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -62,6 +63,7 @@ class QuestionController extends Controller
                 'question_id' => $question->id,
                 'correct' => ($count == $correct),
             ]);
+
             $count++;
         }
 
@@ -78,35 +80,30 @@ class QuestionController extends Controller
         return view('admin.question.edit', [
             'questions' => $question,
             'categories' => $this->categoryRepository->getAll(),
-            'answers' => $this->answerRepository->getAll(),
+            // 'answers' => $this->answerRepository->getAll(),
 
         ]);
     }
 
-    public function update(QuestionRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = $request->validated();
+        $data = $request->validate([
+            'answers.content' => 'array',
+            'answers.content.*' => 'required',
+            'answers.correct' => 'required',
+        ]);
+
         $question = $this->questionRepository->save($data, ['id' => $id]);
 
         $data = $request->except(['content', 'category_id']);
 
-        if (is_countable($data) && count($data) > 0) {
-            for ($i = 0; $i < count($data['answer']); $i++) {
-                $input[] = [
-                    'content' => $data['answer'][$i],
-                    'question_id' => $question->id,
-
-                ];
-            }
+        $answerNumber = count($data['answers']['content']);
+        $answers = $question->answers;
+        for ($i = 0; $i < $answerNumber; $i++) {
+            $answers[$i]->content = $data['answers']['content'][$i];
+            $answers[$i]->correct = $i == $data['answers']['correct'];
         }
-        $ids_answer = collect($question->answers)->pluck('id');
-        dd($ids_answer);
-        foreach ($input as $key => $answer) {
-            if ($data['id'] == $key) {
-                $answer['correct'] = true;
-            }
-            $this->answerRepository->save($answer, ['id' => $ids_answer[$key]]);
-        }
+        $question->push();
 
         return redirect()->route('admin.question.index');
     }

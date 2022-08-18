@@ -1,5 +1,10 @@
 @extends('layouts.admin.master')
 @section('content')
+@if (Session::has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+@endif
 @if (Session::has('success'))
     <div class="alert alert-success" role="alert">
         {{ session('success') }}
@@ -72,33 +77,28 @@
 
   <div class="container-fluid">
   @php
-    $selectedAnswers = collect(old('answers', empty($question) ? [] : $question->answers->pluck('id')));
+    $answerNumber = isset($question) ? $question->answers->count() : 4;
+    $contents = old('answers.content', isset($questions) ? $questions->answers->pluck('content')->all() : []);
+    $correct = old('answers.correct', isset($questions) ? $questions->answers->search(fn ($answer, $key) => $answer->correct) : -1);
 @endphp
-    <div class="container-fluid">
-        <label for="role" class="form-label"> {{ __('user.role') }} </label>
-        
-        @if(!empty($answers))
-
-            <div class="container-fluid">
-                @foreach($answers as $answer)
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="text" name="id[]" id="{{ 'chkbox_'.$answer->id }}" value="{{ $answer->id }}"{{ ($selectedAnswers->contains($answer->id)) ? ' checked' : '' }}>
-                   
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="text" name="answer[]" id="{{ 'chkbox_'.$answer->content }}" value="{{ $answer->content }}"{{ ($selectedAnswers->contains($answer->content)) ? ' checked' : '' }}>
-                   
-                </div>
-                @if($answer->correct == true)
-                    <input class=" form-check-input" type="checkbox" name="radio[]" id="{{ 'chkbox_'.$answer->correct }}" value="{{ $answer->correct }}"{{ ($selectedAnswers->contains($answer->correct)) ? ' checked' : '' }}>
-                @else
-                    
-                @endif 
-                @endforeach
-                 
-            </div>
-        @endif
-    </div>
+        <label for="answers.correct" class="form-label"> {{ __('question.answers.correct') }} </label>
+        <div class="container-fluid   bg-white @error('answers.correct') is-invalid @enderror">
+            @for ($i = 0; $i < $answerNumber; $i++)
+                    <div class=" form-check form-check-reverse">
+                        <input  name="answers[content][]" type="text" class="form-check-label form-control mb-3 @error('answers.content.'.$i) is-invalid @enderror" id="answers.content.{{$i}}" @isset($isShow) readonly @endisset value="{{ $contents[$i] ?? '' }}">  </input> 
+                        <input type="radio" name="answers[correct]" id="answers.correct.{{$i}}" class="form-check-input" value="{{ $i }}" @if($i == $correct) checked @endif @isset($isShow) disabled @endisset>
+                        @error('answers.content.'.$i)
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @endif
+                    </div>
+            @endfor
+        @error('answers.correct')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
   </div>
 
   
