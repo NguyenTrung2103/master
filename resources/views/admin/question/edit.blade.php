@@ -72,7 +72,7 @@
 
   <div class="container-fluid">
   @php
-    $selectedAnswers = collect(old('answer', empty($question) ? [] : $question->answers->pluck('id')->all()));
+    $selectedAnswers = collect(old('answers', empty($question) ? [] : $question->answers->pluck('id')));
 @endphp
     <div class="container-fluid">
         <label for="role" class="form-label"> {{ __('user.role') }} </label>
@@ -81,16 +81,21 @@
 
             <div class="container-fluid">
                 @foreach($answers as $answer)
-                
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="text" name="id[]" id="{{ 'chkbox_'.$answer->id }}" value="{{ $answer->id }}"{{ ($selectedAnswers->contains($answer->id)) ? ' checked' : '' }}>
+                   
+                </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="text" name="answer[]" id="{{ 'chkbox_'.$answer->content }}" value="{{ $answer->content }}"{{ ($selectedAnswers->contains($answer->content)) ? ' checked' : '' }}>
+                   
+                </div>
                 @if($answer->correct == true)
-                    <input class=" form-check-input" type="checkbox" name="answer[]" id="{{ 'chkbox_'.$answer->correct }}" value="{{ $answer->correct }}"{{ ($selectedAnswers->contains($answer->correct)) ? ' checked' : '' }}>
+                    <input class=" form-check-input" type="checkbox" name="radio[]" id="{{ 'chkbox_'.$answer->correct }}" value="{{ $answer->correct }}"{{ ($selectedAnswers->contains($answer->correct)) ? ' checked' : '' }}>
                 @else
                     
-                @endif    
-                </div>
+                @endif 
                 @endforeach
+                 
             </div>
         @endif
     </div>

@@ -23,13 +23,15 @@ class QuestionRequest extends FormRequest
      */
     public function rules()
     {
-        
         return [
-            'content' => ['required',],
+            'content' => ['required'],
             'category_id' => 'required',
-            
-            
-            
+            // 'answer_1' => 'required',
+            // 'answer_2' => 'required',
+            // 'answer_3' => 'required',
+            // 'answer_4' => 'required',
+            // 'correct' => 'required',
+
         ];
     }
 }
