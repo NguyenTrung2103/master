@@ -100,12 +100,12 @@ class QuestionController extends Controller
             }
         }
         $ids_answer = collect($question->answers)->pluck('id');
-
+        dd($ids_answer);
         foreach ($input as $key => $answer) {
             if ($data['id'] == $key) {
                 $answer['correct'] = true;
             }
-            $this->answerRepository->saveMany($answer, ['id' => $ids_answer[$key]]);
+            $this->answerRepository->save($answer, ['id' => $ids_answer[$key]]);
         }
 
         return redirect()->route('admin.question.index');

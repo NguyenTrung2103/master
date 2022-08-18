@@ -26,11 +26,11 @@ class QuestionRequest extends FormRequest
         return [
             'content' => ['required'],
             'category_id' => 'required',
-            // 'answer_1' => 'required',
-            // 'answer_2' => 'required',
-            // 'answer_3' => 'required',
-            // 'answer_4' => 'required',
-            // 'correct' => 'required',
+            'answer_1' => 'required',
+            'answer_2' => 'required',
+            'answer_3' => 'required',
+            'answer_4' => 'required',
+            'correct' => 'required|in:0,1,2,3',
 
         ];
     }
