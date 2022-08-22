@@ -28,6 +28,12 @@
         <input name="id" id="id" class="form-control mb-2" value="{{ $customer->id }}" readonly>
     </div>
 @endif
+@if (!empty($customer))
+    <div class="container-fluid">
+        <label for="mkh" class="form-label"> Mã KH </label>
+        <input name="mkh" id="mkh" class="form-control mb-2" value="{{ $customer->mkh }}" readonly>
+    </div>
+@endif
 
     <div class="container-fluid">
         <label for="name" class="form-label"> Thông tin khách hàng </label>

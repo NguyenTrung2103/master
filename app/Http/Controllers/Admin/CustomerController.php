@@ -43,8 +43,8 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request)
     {
         $data = $request->validated();
-        $data['birthday'] = now();
-
+        $data['mkh'] = 'DG'. $data['cmnd'];
+        
         DB::beginTransaction();
         try {
             $customer = $this->customerRepository->save($data);

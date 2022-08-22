@@ -37,6 +37,15 @@
             </span>
         @enderror
     </div>
+    <div class="container-fluid">
+        <label for="birthday" class="form-label"> Ngày sinh </label>
+        <input name="birthday" type="date" class="form-control mb-2 @error('birthday') is-invalid @enderror" id="birthday" placeholder="" value="{{ old('birthday', $customer->birthday ?? '') }}"{{ $isShow ? ' readonly' : ''}}>
+        @error('birthday')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
     <div class="container-fluid">
         <label for="address" class="form-label"> Địa chỉ </label>

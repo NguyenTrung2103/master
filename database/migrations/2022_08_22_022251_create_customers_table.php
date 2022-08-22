@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->unsignedInteger('mkh')->generatedAs();
+            $table->string('mkh',255);
             $table->integer('age');
             $table->string('address', 255);
             $table->string('note', 255);

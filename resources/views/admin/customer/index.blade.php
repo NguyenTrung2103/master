@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between">
     <h1 style="font-weight: bold;">Customer List</h1>
     <div>
-      <a href="{{ route('admin.user.create') }}" class="btn btn-primary">{{__('button.create')}}</a>
+      <a href="{{ route('admin.customer.create') }}" class="btn btn-primary">{{__('button.create')}}</a>
     </div>
   </div>
   <div class="table-responsive">

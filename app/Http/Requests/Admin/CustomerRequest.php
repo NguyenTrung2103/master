@@ -39,7 +39,7 @@ class CustomerRequest extends FormRequest
             'sex' => 'required',
             'role_id' => 'required',
             'user_id' => 'required',
-
+            'birthday'=> 'required',
         ];
     }
 }
