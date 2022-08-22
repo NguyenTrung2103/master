@@ -30,14 +30,16 @@ class CustomerRequest extends FormRequest
                 'not_regex:/^[@#$%&*]/',
 
             ],
-            'age'=>'required',
-            'address'=>'required',
-            'note'=>'required',
-            'phone'=>'required',
-            'cmnd'=>'required',
-            'bank'=>'required',
-            'sex'=>'required',
-            
+            'age' => 'required',
+            'address' => 'required',
+            'note' => 'required',
+            'phone' => 'required',
+            'cmnd' => 'required',
+            'bank' => 'required',
+            'sex' => 'required',
+            'role_id' => 'required',
+            'user_id' => 'required',
+
         ];
     }
 }

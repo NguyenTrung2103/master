@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'id',
         'name',
@@ -26,10 +27,11 @@ class Customer extends Model
 
     public function roles()
     {
-        return $this->hasMany(Role::class, 'role_id');
+        return $this->hasMany(Role::class, 'id');
     }
+
     public function users()
     {
-        return $this->hasMany(User::class, 'user_id');
+        return $this->hasMany(User::class, 'id');
     }
 }

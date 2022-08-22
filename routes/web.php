@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserContrller;
-use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Session;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +36,8 @@ Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify', '
     Route::resource('customer', CustomerController::class);
 });
 
-Route::view('contact','sessionlist');
-Route::view('contact1','session');
+Route::view('contact', 'sessionlist');
+Route::view('contact1', 'session');
 //Route::post('contact',[Session::class,'postcontact']);
 
 Auth::routes(['verify' => true]);

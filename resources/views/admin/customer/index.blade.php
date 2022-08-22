@@ -58,7 +58,7 @@
               </select>      
             </td>
             <td>
-                <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
+                <a href="{{ route('admin.customer.edit', $customer->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
                 <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
                 <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.user.destroy', $user->id) }}">
                     @csrf

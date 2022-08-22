@@ -1,8 +1,7 @@
 @extends('layouts.admin.master')
 @section('content')
-@if (!empty($customer))
-<form class="container-fluid" method="post" action="{{ route('admin.customer.update', $customer->id) }}">
-@method('PUT')
+@if (empty($customer))
+<form class="container-fluid" method="post" action="{{ route('admin.customer.store') }}">
     @csrf
     <div class="d-flex justify-content-between">
         <h3> {{ __('user.createUser') }} </h3>
