@@ -36,6 +36,14 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Admin\Answer\AnswerRepositoryInterface::class,
             \App\Repositories\Admin\Answer\AnswerRepository::class
         );
+        $this->app->singleton(
+            \App\Repositories\Admin\Customer\CustomerRepositoryInterface::class,
+            \App\Repositories\Admin\Customer\CustomerRepository::class
+        );
+        $this->app->singleton(
+            \App\Repositories\Admin\Phonezalo\PhonezaloRepositoryInterface::class,
+            \App\Repositories\Admin\Phonezalo\PhonezaloRepository::class
+        );
     }
 
     public function boot()

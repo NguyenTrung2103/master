@@ -121,8 +121,6 @@ class QuestionController extends Controller
             abort(404);
         }
 
-        
-
         return view('admin.question.show', [
             'questions' => $question,
             'categories' => $this->categoryRepository->getAll(),

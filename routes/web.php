@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\Admin\ProductController;
@@ -32,9 +33,11 @@ Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify', '
     Route::resource('category', CategoryController::class);
     Route::resource('permission-group', PermissionGroupController::class);
     Route::resource('question', QuestionController::class);
+    Route::resource('customer', CustomerController::class);
 });
 
-//Route::view('contact','sendmail');
+Route::view('contact', 'sessionlist');
+Route::view('contact1', 'session');
 //Route::post('contact',[Session::class,'postcontact']);
 
 Auth::routes(['verify' => true]);

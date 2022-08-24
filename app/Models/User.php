@@ -95,4 +95,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->type == self::TYPES['student'];
     }
+
+    public function customer()
+    {
+        return $this->belongsToMany(Customer::class, 'user_id');
+    }
 }
