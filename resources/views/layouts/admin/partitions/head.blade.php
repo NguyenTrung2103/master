@@ -15,6 +15,9 @@
     
     <title>{{ env('APP_NAME') }}</title>
     <script>
+        var survey_options = document.getElementById('survey_options');
+        var add_more_fields = document.getElementById('add_more_fields');
+        var remove_fields = document.getElementById('remove_fields');
         $(function(){
             $(".delete").click(function(){
                 swal({
@@ -34,9 +37,33 @@
                         swal("Your imaginary file is safe!");
                     }
                 });
-            });
+            });   
         });
-  
+        $(document).ready(function() {
+    var max_fields = 10;
+    var wrapper = $(".container1");
+    var add_button = $(".add_form_field");
+
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append('<div><input type="text" name="phonezalo[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+});
+
+
+
 </script>
 
 

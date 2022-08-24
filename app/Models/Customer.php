@@ -27,11 +27,16 @@ class Customer extends Model
 
     public function roles()
     {
-        return $this->hasMany(Role::class, 'id');
+        return $this->hasMany(Role::class, 'id', 'role_id');
     }
 
     public function users()
     {
-        return $this->hasMany(User::class, 'id');
+        return $this->hasMany(User::class, 'id', 'user_id');
+    }
+
+    public function phonezalo()
+    {
+        return $this->hasMany(Phonezalo::class, 'customer_id');
     }
 }

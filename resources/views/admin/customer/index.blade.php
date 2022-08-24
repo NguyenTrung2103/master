@@ -22,12 +22,12 @@
         @foreach($customers as $customer)
         <tr>
             <td>
-              <select name="" id="">
+              
                 @foreach($customer->roles as $role)
-              <option> {{ $role->name }} </option>
+              <span> {{ $role->name }} </span>
               
                 @endforeach
-              </select>      
+                   
             </td>
             <td>
                 <span class="cat-links">
@@ -50,17 +50,17 @@
                 </span>  
             </td>
             <td>
-              <select name="" id="">
+              
                 @foreach($customer->users as $user)
-              <option> {{ $user->name }} </option>
+                <span class="cat-links"> {{ $user->username }} </span>
               
                 @endforeach
-              </select>      
+                  
             </td>
             <td>
                 <a href="{{ route('admin.customer.edit', $customer->id) }}" class="btn btn-primary"> {{__('messages.edit')}} </a>
                 <a class="btn btn-danger delete " > {{__('messages.delete')}} </a>
-                <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.user.destroy', $user->id) }}">
+                <form id="delete-form" class="d-inline" method="post" action="{{ route('admin.customer.destroy', $customer->id) }}">
                     @csrf
                     @method('DELETE')
                     
@@ -70,9 +70,8 @@
         @endforeach
         @endif
 
-       
+        {{ $customers->links() }}
     </table>
-    {{ $customers->links() }}
   </div>
 </div>
 @endsection

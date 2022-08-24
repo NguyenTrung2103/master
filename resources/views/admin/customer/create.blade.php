@@ -67,6 +67,24 @@
         @enderror
     </div>
 
+    <div class="container-fluid">
+        <label for="phone" class="form-label"> Thêm số zalo </label>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <div class="container1">
+        <button class="add_form_field">Thêm Số zalo &nbsp; 
+        <span style="font-size:16px; font-weight:bold;">+ </span>
+        </button>
+    <div><input type="text" name="phonezalo[]"></div>
+    </div>
+        @error('phone')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    
+    
+
 
 
 @php
@@ -78,7 +96,7 @@
             <div class="container-fluid">
                 @foreach($roles as $role)
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="role_id" id="{{ 'chkbox_'.$role->id }}" value="{{ $role->id }}"{{ ($selectedRoles->contains($role->id)) ? ' checked' : '' }}{{ $isShow ? ' readonly' : ''}}>
+                    <input class="form-check-input" type="radio" name="role_id" id="{{ 'chkbox_'.$role->id }}" value="{{ $role->id }}"{{ ($selectedRoles->contains($role->id)) ? ' checked' : '' }}{{ $isShow ? ' readonly' : ''}}>
                     <label class="form-check-label" for="{{ 'chkbox_'.$role->id }}">{{ $role->name }}</label>
                 </div>
                 @endforeach
@@ -132,7 +150,7 @@
             <div class="container-fluid">
                 @foreach($users as $user)
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="user_id" id="{{ 'chkbox_'.$user->id }}" value="{{ $user->id }}"{{ ($selectedUsers->contains($user->id)) ? ' checked' : '' }}{{ $isShow ? ' readonly' : ''}}>
+                    <input class="form-check-input" type="radio" name="user_id" id="{{ 'chkbox_'.$user->id }}" value="{{ $user->id }}"{{ ($selectedUsers->contains($user->id)) ? ' checked' : '' }}{{ $isShow ? ' readonly' : ''}}>
                     <label class="form-check-label" for="{{ 'chkbox_'.$user->id }}">{{ $user->name }}</label>
                 </div>
                 @endforeach
@@ -150,14 +168,12 @@
     </div>
 
     
-
-
-
     <div class="row mt-3">
         <div class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-primary" value="{{ __('button.save') }}">
+            <input type="submit" class="btn btn-primary" value="{{ __('button.save') }}"></input>
         </div>
     </div>
 </form>
 @endif
+
 @endsection

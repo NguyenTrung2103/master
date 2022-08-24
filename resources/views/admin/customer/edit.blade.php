@@ -1,7 +1,9 @@
 @extends('layouts.admin.master')
 @section('content')
+
 @if (!empty($customer))
 <form class="container-fluid" method="post" action="{{ route('admin.customer.update', $customer->id) }}">
+
 @method('PUT')
     @csrf
     <div class="d-flex justify-content-between">
@@ -44,6 +46,15 @@
             </span>
         @enderror
     </div>
+    <div class="container-fluid">
+        <label for="birthday" class="form-label"> Ngày sinh </label>
+        <input name="birthday" type="date" class="form-control mb-2 @error('birthday') is-invalid @enderror" id="birthday" placeholder="" value="{{ old('birthday', $customer->birthday ?? '') }}"{{ $isShow ? ' readonly' : ''}}>
+        @error('birthday')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
 
     <div class="container-fluid">
         <label for="address" class="form-label"> Địa chỉ </label>
@@ -64,6 +75,36 @@
             </span>
         @enderror
     </div>
+    <div class="container-fluid">
+                        <label for="phone_zalo" class="form-label">Số zalo</label>
+                        
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="inputFormRow">
+                                        @if(!empty($customer))
+                                        @foreach($customer->phonezalo as $phone_zalo)
+                                        <div class="input-group mb-3">
+                                            <input type="tel" name="phonezalo[]" class="form-control m-input" placeholder="" value="{{$phone_zalo->phone}}" autocomplete="off">
+                                            <div class="input-group-append">
+                                                <input id="removeRow" type="submit" class="btn btn-danger">Xóa</input>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                        @else
+                                        <div class="input-group mb-3">
+                                            <input type="tel" name="phone_zalo[]" class="form-control m-input" placeholder="" value="" autocomplete="off">
+                                            <div class="input-group-append">
+                                                <input id="removeRow" type="submit" class="btn btn-danger">Xóa</input>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div id="newRow"></div>
+                                    <input id="addRow" type="submit" class="btn btn-info" style="margin-top: -15px;">Thêm</input>
+                                </div>
+                            </div>
+                        
+                    </div>
 
 
 
@@ -157,5 +198,6 @@
         </div>
     </div>
 </form>
+
 @endif
 @endsection

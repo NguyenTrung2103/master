@@ -38,8 +38,9 @@ class CustomerRequest extends FormRequest
             'bank' => 'required',
             'sex' => 'required',
             'role_id' => 'required',
-            'user_id' => 'required',
-            'birthday'=> 'required',
+            //'user_id' => 'required',
+            'birthday' => 'required',
+            'phonezalo' => 'required',
         ];
     }
 }

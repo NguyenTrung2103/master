@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CustomerRequest;
 use App\Repositories\Admin\Customer\CustomerRepositoryInterface as CustomerRepository;
+use App\Repositories\Admin\Phonezalo\PhonezaloRepositoryInterface as PhonezaloRepository;
 use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
 use App\Repositories\Admin\User\UserRepositoryInterface as UserRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
@@ -15,13 +17,16 @@ class CustomerController extends Controller
 
     protected $roleRepository;
 
+    protected $phonezaloRepository;
+
     protected $customerRepository;
 
-    public function __construct(customerRepository $customerRepository, UserRepository $userRepository, RoleRepository $roleRepository)
+    public function __construct(customerRepository $customerRepository, UserRepository $userRepository, RoleRepository $roleRepository, PhonezaloRepository $phonezaloRepository)
     {
         $this->customerRepository = $customerRepository;
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
+        $this->phonezaloRepository = $phonezaloRepository;
     }
 
     public function index()
@@ -43,13 +48,22 @@ class CustomerController extends Controller
     public function store(CustomerRequest $request)
     {
         $data = $request->validated();
-        $data['mkh'] = 'DG'. $data['cmnd'];
-        
+
+        $data['user_id'] = Auth::user()->id;
+        $data['mkh'] = 'DG'.$data['cmnd'];
+
         DB::beginTransaction();
         try {
             $customer = $this->customerRepository->save($data);
-            //$customer->roles()->sync($request->input('role_id'));
-            // $customer->users()->sync($request->input('user_id'));
+
+            $answerNumber = count($data['phonezalo']);
+            for ($i = 0; $i < $answerNumber; $i++) {
+                $customer->phonezalo()->create([
+                    'phone' => $request->phonezalo[$i],
+                    'customer_id' => $customer->id,
+                ]);
+            }
+
             DB::commit();
 
             return redirect()->route('admin.customer.index', $customer->id)->with(
@@ -76,6 +90,7 @@ class CustomerController extends Controller
             'customer' => $customer,
             'roles' => $this->roleRepository->getAll(),
             'users' => $this->userRepository->getAll(),
+            'phonezalo' => $this->phonezaloRepository->getAll(),
             'isShow' => false,
         ]);
     }
@@ -85,7 +100,16 @@ class CustomerController extends Controller
         DB::beginTransaction();
 
         try {
+            $data = $request->all();
+
             $customer = $this->customerRepository->save($request->validated(), ['id' => $id]);
+
+            $phones = [];
+            foreach ($data['phonezalo'] as $phone_zalo) {
+                array_push($phones, ['phone' => $phone_zalo, 'customer_id' => $id]);
+            }
+            $customer->phonezalo()->delete();
+            $customer->phonezalo()->upsert($phones, 'phone');
 
             DB::commit();
 
