@@ -116,7 +116,7 @@ class CustomerController extends Controller
             return redirect()->route('admin.customer.index', $id)->with(
                 'success',
                 __('user.update.success')
-             );
+            );
         } catch (\Exception) {
             DB::rollback();
 

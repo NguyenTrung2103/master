@@ -33,9 +33,9 @@ class InformUserProfile extends Mailable
     public function build()
     {
         $mail = $this->view('admin.users.inform-user-profile-mail',
-        [
-            'user' => $this->user,
-        ]);
+            [
+                'user' => $this->user,
+            ]);
 
         if ($this->attachment) {
             $mail->attach($this->attachment, [

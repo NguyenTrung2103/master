@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ImgController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\Admin\ProductController;
@@ -34,6 +35,7 @@ Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify', '
     Route::resource('permission-group', PermissionGroupController::class);
     Route::resource('question', QuestionController::class);
     Route::resource('customer', CustomerController::class);
+    Route::resource('img', ImgController::class);
 });
 
 Route::view('contact', 'sessionlist');
