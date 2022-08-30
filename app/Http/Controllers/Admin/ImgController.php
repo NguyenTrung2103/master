@@ -128,6 +128,6 @@ class ImgController extends Controller
         Img::where('id', $id)->delete();
 
         return redirect()->route('admin.img.index')
-                        ->with('success', 'Post has been deleted successfully');
+                        ->with('success', 'Image has been deleted successfully');
     }
 }
