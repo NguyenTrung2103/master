@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserContrller;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Session;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\ProvinceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,8 +52,32 @@ Route::group(['middleware' => ['throttle:6,1']], function () {
     Route::post('/email/verify/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 });
-Route::get('set-locale/{locale}', function ($locale) {
-    session()->put('locale', $locale);
 
-    return redirect()->back();
-})->middleware('locale')->name('locale.setting');
+
+
+    Route::get('/form', [CountryController::class,'showForm']);
+    Route::post('/showCitiesInCountry', [ProvinceController::class,'showCitiesInCountry']);
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
