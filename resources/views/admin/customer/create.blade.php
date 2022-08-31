@@ -157,6 +157,26 @@
             </div>
         @endif
     </div>
+    {{ csrf_field() }}
+        <div class="form-group">
+            <label>Select Country:</label>
+            <select class="form-control" name="country">
+                <option value="">---</option>
+                @foreach($countries as $country)
+                    <option value="{{ $country->code }}">{{ $country->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Select City:</label>
+            <select class="form-control" name="city">
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Submit</button>
+        </div>
     <div class="container-fluid">
         <label for="note" class="form-label"> Note </label>
         <input name="note" type="text" class="form-control mb-2 @error('note') is-invalid @enderror" id="note" placeholder="" value="{{ old('note', $customer->note ?? '') }}"{{ $isShow ? ' readonly' : ''}}>
