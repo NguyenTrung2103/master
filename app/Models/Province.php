@@ -13,4 +13,9 @@ class Province extends Model
     {
         return $this->belongsTo(Country::class, 'country_code','code');
     }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }

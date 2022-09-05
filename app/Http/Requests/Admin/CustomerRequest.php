@@ -31,7 +31,7 @@ class CustomerRequest extends FormRequest
 
             ],
             'age' => 'required',
-            'address' => 'required',
+            //'address' => 'required',
             'note' => 'required',
             'phone' => 'required',
             'cmnd' => 'required',
@@ -41,6 +41,9 @@ class CustomerRequest extends FormRequest
             //'user_id' => 'required',
             'birthday' => 'required',
             'phonezalo' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'province' => 'required',
         ];
     }
 }

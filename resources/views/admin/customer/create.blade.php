@@ -158,7 +158,7 @@
         @endif
     </div>
     {{ csrf_field() }}
-        <div class="form-group">
+        <div class="container-fluid">
             <label>Select Country:</label>
             <select class="form-control" name="country">
                 <option value="">---</option>
@@ -168,15 +168,25 @@
             </select>
         </div>
 
-        <div class="form-group">
+        <div class="container-fluid">
             <label>Select City:</label>
             <select class="form-control" name="city">
             </select>
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-success" type="submit">Submit</button>
+        <div class="container-fluid">
+            <label>Select City:</label>
+            <select class="form-control" name="province">
+            </select>
         </div>
+
+        <div class="container-fluid">
+            <label>Select City:</label>
+            <select class="form-control" name="district">
+            </select>
+        </div>
+
+        
     <div class="container-fluid">
         <label for="note" class="form-label"> Note </label>
         <input name="note" type="text" class="form-control mb-2 @error('note') is-invalid @enderror" id="note" placeholder="" value="{{ old('note', $customer->note ?? '') }}"{{ $isShow ? ' readonly' : ''}}>
@@ -194,6 +204,76 @@
         </div>
     </div>
 </form>
+<script type="text/javascript">
+    $("select[name='country']").change(function(){
+        var country_code = $(this).val();
+        var token = $("input[name='_token']").val();
+        $.ajax({
+            url: "{{ url('/showCitiesInCountry') }}",
+            method: 'POST',
+            data: {
+                country_code: country_code,
+                _token: token
+            },
+            success: function(data) {
+                console.log(data);
+                $("select[name='city'").html('');
+                $.each(data, function(key, value){
+                    $("select[name='city']").append(
+                        "<option value=" + value.id+ ">" + value.name + "</option>"
+                    );
+                });
+            }
+        });
+    });
+
+    $("select[name='city']").change(function(){
+        var province_id = $(this).val();
+        var token = $("input[name='_token']").val();
+        console.log(province_id);
+        $.ajax({
+            url: "{{ url('/getCitiesInProvince') }}",
+            method: 'POST',
+            data: {
+                province_id: province_id,
+                _token: token
+            },
+            success: function(data) {
+                console.log(data);
+                $("select[name='province'").html('');
+                $.each(data, function(key, value){
+                    $("select[name='province']").append(
+                        "<option value=" + value.id + ">" + value.name + "</option>"
+                    );
+                });
+            }
+        });
+    });
+
+    $("select[name='province']").change(function(){
+        var city_id = $(this).val();
+        var token = $("input[name='_token']").val();
+        
+        $.ajax({
+            url: "{{ url('/getDistrictsInCity') }}",
+            method: 'POST',
+            data: {
+                city_id: city_id,
+                _token: token
+            },
+            success: function(data) {
+                console.log(data);
+                $("select[name='district'").html('');
+                $.each(data, function(key, value){
+                    $("select[name='district']").append(
+                        "<option value=" + value.id + ">" + value.name + "</option>"
+                    );
+                });
+            }
+        });
+    });
+</script>
 @endif
+
 
 @endsection

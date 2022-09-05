@@ -57,9 +57,14 @@ Route::group(['middleware' => ['throttle:6,1']], function () {
 
     Route::get('/form', [CountryController::class,'showForm']);
     Route::post('/showCitiesInCountry', [ProvinceController::class,'showCitiesInCountry']);
+    Route::post('/getCitiesInProvince', [ProvinceController::class,'getCitiesInProvince']);
+    Route::post('/getDistrictsInCity', [ProvinceController::class,'getDistrictsInCity']);
+
+    Route::get('set-locale/{locale}', function ($locale) {
+        session()->put('locale', $locale);
     
-
-
+        return redirect()->back();
+    })->middleware('locale')->name('locale.setting');
 
 
 

@@ -8,6 +8,7 @@ use App\Repositories\Admin\Customer\CustomerRepositoryInterface as CustomerRepos
 use App\Repositories\Admin\Phonezalo\PhonezaloRepositoryInterface as PhonezaloRepository;
 use App\Repositories\Admin\Role\RoleRepositoryInterface as RoleRepository;
 use App\Repositories\Admin\User\UserRepositoryInterface as UserRepository;
+use App\Models\Country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -42,13 +43,14 @@ class CustomerController extends Controller
             'roles' => $this->roleRepository->getAll(),
             'users' => $this->userRepository->getAll(),
             'isShow' => false,
+            'countries' => Country::all(),
         ]);
     }
 
     public function store(CustomerRequest $request)
     {
         $data = $request->validated();
-
+        dd($data);
         $data['user_id'] = Auth::user()->id;
         $data['mkh'] = 'DG'.$data['cmnd'];
 
