@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ImgController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PermissionGroupController;
 use App\Http\Controllers\Admin\ProductController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserContrller;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Session;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\ProvinceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +37,7 @@ Route::name('admin.')->prefix('admin')->middleware(['verified', 'adminverify', '
     Route::resource('permission-group', PermissionGroupController::class);
     Route::resource('question', QuestionController::class);
     Route::resource('customer', CustomerController::class);
+    Route::resource('img', ImgController::class);
 });
 
 Route::view('contact', 'sessionlist');
@@ -48,8 +52,37 @@ Route::group(['middleware' => ['throttle:6,1']], function () {
     Route::post('/email/verify/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 });
-Route::get('set-locale/{locale}', function ($locale) {
-    session()->put('locale', $locale);
 
-    return redirect()->back();
-})->middleware('locale')->name('locale.setting');
+
+
+    Route::get('/form', [CountryController::class,'showForm']);
+    Route::post('/showCitiesInCountry', [ProvinceController::class,'showCitiesInCountry']);
+    Route::post('/getCitiesInProvince', [ProvinceController::class,'getCitiesInProvince']);
+    Route::post('/getDistrictsInCity', [ProvinceController::class,'getDistrictsInCity']);
+
+    Route::get('set-locale/{locale}', function ($locale) {
+        session()->put('locale', $locale);
+    
+        return redirect()->back();
+    })->middleware('locale')->name('locale.setting');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
